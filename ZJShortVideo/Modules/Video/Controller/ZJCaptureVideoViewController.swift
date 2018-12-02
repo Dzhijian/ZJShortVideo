@@ -31,7 +31,7 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
         view.addSubview(captureBtn)
         captureBtn.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.view.snp.centerX)
-            make.top.equalTo(Adapt(10))
+            make.bottom.equalTo(Adapt(-40))
             make.width.height.equalTo(Adapt(40))
         }
     }
