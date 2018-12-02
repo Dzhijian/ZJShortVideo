@@ -12,11 +12,11 @@ class ZJHomeViewController: ZJBaseViewController {
 
     lazy var mainCollection : UICollectionView =  {
        let layout = UICollectionViewFlowLayout.init()
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
-        layout.itemSize = CGSize(width: (kScreenW-10)/2, height: Adapt(230))
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 5
+        layout.itemSize = CGSize(width: (kScreenW-5)/2, height: Adapt(230))
         let mainCollection = UICollectionView.init(frame: self.view.frame, collectionViewLayout: layout)
-        mainCollection.backgroundColor = kOrangeColor
+        mainCollection.backgroundColor = kWhiteColor
         mainCollection.delegate = self
         mainCollection.dataSource = self
         mainCollection.showsHorizontalScrollIndicator = false

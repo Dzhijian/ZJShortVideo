@@ -20,12 +20,12 @@ let kLightGrayColor     = UIColor.lightGray
 
 
 
-func kRGBAColor(r: CGFloat, g: CGFloat, b:CGFloat, a: CGFloat) -> UIColor {
+func kRGBAColor(_ r: CGFloat, _ g: CGFloat, _ b:CGFloat, _ a: CGFloat) -> UIColor {
     return UIColor(red: r / 255.0, green: g/255.0, blue: b/255.0, alpha: a)
 }
 
-func kRGBAColor(r: CGFloat, g: CGFloat, b:CGFloat) -> UIColor {
-    return kRGBAColor(r: r, g: g, b: b, a: 1.0)
+func kRGBAColor(_ r: CGFloat, _ g: CGFloat, _ b:CGFloat) -> UIColor {
+    return kRGBAColor(r,g,b,1.0)
 }
 
 func kColorFromHex(rgbValue: Int) -> (UIColor) {
@@ -72,7 +72,7 @@ func kColorFromHexString(rgbString: String) -> UIColor {
     Scanner.init(string: gString).scanHexInt32(&g)
     Scanner.init(string: bString).scanHexInt32(&b)
     
-    return kRGBAColor(r: CGFloat(r), g: CGFloat(g), b: CGFloat(b))
+    return kRGBAColor(CGFloat(r), CGFloat(g),CGFloat(b))
 
 }
 

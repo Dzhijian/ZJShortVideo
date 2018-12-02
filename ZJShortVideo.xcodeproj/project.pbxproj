@@ -25,6 +25,11 @@
 		042F8EE321B3C7EE0039EC71 /* ZJBaseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8EE221B3C7EE0039EC71 /* ZJBaseCollectionCell.swift */; };
 		042F8EE521B3C8080039EC71 /* ZJBaseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8EE421B3C8080039EC71 /* ZJBaseTableCell.swift */; };
 		042F8EE721B3C8480039EC71 /* ZJHomeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8EE621B3C8480039EC71 /* ZJHomeListCell.swift */; };
+		045803DC21B4095B00A9E336 /* ZJPushVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045803DB21B4095B00A9E336 /* ZJPushVideoViewController.swift */; };
+		045803DF21B40C0900A9E336 /* ZJEditVideoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045803DE21B40C0900A9E336 /* ZJEditVideoHeaderView.swift */; };
+		045803E121B4128200A9E336 /* ZJCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045803E021B4128200A9E336 /* ZJCommon.swift */; };
+		045803E421B414C800A9E336 /* ZJEditVideoFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045803E321B414C800A9E336 /* ZJEditVideoFooterView.swift */; };
+		045803E821B418BF00A9E336 /* ZJCaptureVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045803E721B418BF00A9E336 /* ZJCaptureVideoViewController.swift */; };
 		1C07C5B772CF5FBB979C7BDA /* Pods_ZJShortVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42ACD9C2043EDF62C85FEED8 /* Pods_ZJShortVideo.framework */; };
 		55B2DE2ADB3DD1D3F978F73F /* Pods_ZJShortVideoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94358B6AD564B7C27DC7C6C8 /* Pods_ZJShortVideoTests.framework */; };
 		B4CB0CE07551A51AE8312FDF /* Pods_ZJShortVideoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23DD52F275734F236484C35 /* Pods_ZJShortVideoUITests.framework */; };
@@ -72,6 +77,11 @@
 		042F8EE221B3C7EE0039EC71 /* ZJBaseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseCollectionCell.swift; sourceTree = "<group>"; };
 		042F8EE421B3C8080039EC71 /* ZJBaseTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseTableCell.swift; sourceTree = "<group>"; };
 		042F8EE621B3C8480039EC71 /* ZJHomeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJHomeListCell.swift; sourceTree = "<group>"; };
+		045803DB21B4095B00A9E336 /* ZJPushVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJPushVideoViewController.swift; sourceTree = "<group>"; };
+		045803DE21B40C0900A9E336 /* ZJEditVideoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJEditVideoHeaderView.swift; sourceTree = "<group>"; };
+		045803E021B4128200A9E336 /* ZJCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCommon.swift; sourceTree = "<group>"; };
+		045803E321B414C800A9E336 /* ZJEditVideoFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJEditVideoFooterView.swift; sourceTree = "<group>"; };
+		045803E721B418BF00A9E336 /* ZJCaptureVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCaptureVideoViewController.swift; sourceTree = "<group>"; };
 		105FB9AE3BBBA504277333AB /* Pods-ZJShortVideoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZJShortVideoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZJShortVideoTests/Pods-ZJShortVideoTests.release.xcconfig"; sourceTree = "<group>"; };
 		213A7BBA720FDFB159F08EC8 /* Pods-ZJShortVideoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZJShortVideoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZJShortVideoTests/Pods-ZJShortVideoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2FD9FC1CAC392E3D8CC6D54D /* Pods-ZJShortVideoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZJShortVideoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZJShortVideoUITests/Pods-ZJShortVideoUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -177,7 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				042F8ED721B3B5FD0039EC71 /* Home */,
-				042F8ED821B3B6030039EC71 /* Add */,
+				042F8ED821B3B6030039EC71 /* EditVideo */,
 				042F8ED921B3B60D0039EC71 /* Profile */,
 				042F8ECB21B3B11A0039EC71 /* MainVC */,
 			);
@@ -217,6 +227,7 @@
 				042F8ED121B3B2080039EC71 /* ZJColorsMacor.swift */,
 				042F8ED321B3B3740039EC71 /* ZJFontsMacor.swift */,
 				042F8ED521B3B43E0039EC71 /* ZJDeviceMacor.swift */,
+				045803E021B4128200A9E336 /* ZJCommon.swift */,
 			);
 			path = Macros;
 			sourceTree = "<group>";
@@ -238,12 +249,14 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		042F8ED821B3B6030039EC71 /* Add */ = {
+		042F8ED821B3B6030039EC71 /* EditVideo */ = {
 			isa = PBXGroup;
 			children = (
 				042F8EDE21B3B6430039EC71 /* ZJAddVideoViewController.swift */,
+				045803E221B4141E00A9E336 /* Controller */,
+				045803DD21B40AB600A9E336 /* View */,
 			);
-			path = Add;
+			path = EditVideo;
 			sourceTree = "<group>";
 		};
 		042F8ED921B3B60D0039EC71 /* Profile */ = {
@@ -269,6 +282,24 @@
 				042F8EE421B3C8080039EC71 /* ZJBaseTableCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		045803DD21B40AB600A9E336 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				045803DE21B40C0900A9E336 /* ZJEditVideoHeaderView.swift */,
+				045803E321B414C800A9E336 /* ZJEditVideoFooterView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		045803E221B4141E00A9E336 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				045803E721B418BF00A9E336 /* ZJCaptureVideoViewController.swift */,
+				045803DB21B4095B00A9E336 /* ZJPushVideoViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		62CF1C3949E098434DCB03A0 /* Pods */ = {
@@ -527,8 +558,13 @@
 			files = (
 				042F8EC821B3B0F50039EC71 /* ZJBaseViewController.swift in Sources */,
 				042F8EDD21B3B6350039EC71 /* ZJProfileViewController.swift in Sources */,
+				045803DC21B4095B00A9E336 /* ZJPushVideoViewController.swift in Sources */,
+				045803E821B418BF00A9E336 /* ZJCaptureVideoViewController.swift in Sources */,
 				042F8EDF21B3B6430039EC71 /* ZJAddVideoViewController.swift in Sources */,
 				042F8EDB21B3B6270039EC71 /* ZJHomeViewController.swift in Sources */,
+				045803E421B414C800A9E336 /* ZJEditVideoFooterView.swift in Sources */,
+				045803DF21B40C0900A9E336 /* ZJEditVideoHeaderView.swift in Sources */,
+				045803E121B4128200A9E336 /* ZJCommon.swift in Sources */,
 				042F8ED421B3B3740039EC71 /* ZJFontsMacor.swift in Sources */,
 				042F8E9621B3AF670039EC71 /* AppDelegate.swift in Sources */,
 				042F8EE521B3C8080039EC71 /* ZJBaseTableCell.swift in Sources */,
@@ -715,6 +751,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R65337KS8W;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ZJShortVideo/Macros/ZJCommon.swift;
 				INFOPLIST_FILE = ZJShortVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -735,6 +773,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R65337KS8W;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ZJShortVideo/Macros/ZJCommon.swift;
 				INFOPLIST_FILE = ZJShortVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

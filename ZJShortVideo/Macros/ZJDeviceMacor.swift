@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import SnapKit
+import Kingfisher
+
 
 let kScreenW = UIScreen.main.bounds.size.width
 let kScreenH = UIScreen.main.bounds.size.height
+
+// 判断是否为 iPhone X
+let kisIphoneX = kScreenH >= 812 ? true : false
+
 // 自定义索引值
 let kBaseTarget : Int = 1000
 // 宽度比
