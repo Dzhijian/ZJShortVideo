@@ -8,12 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		042F8E9621B3AF670039EC71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8E9521B3AF670039EC71 /* AppDelegate.swift */; };
-		042F8E9821B3AF670039EC71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8E9721B3AF670039EC71 /* ViewController.swift */; };
 		042F8E9B21B3AF670039EC71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042F8E9921B3AF670039EC71 /* Main.storyboard */; };
 		042F8E9D21B3AF680039EC71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 042F8E9C21B3AF680039EC71 /* Assets.xcassets */; };
 		042F8EA021B3AF680039EC71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042F8E9E21B3AF680039EC71 /* LaunchScreen.storyboard */; };
 		042F8EAB21B3AF680039EC71 /* ZJShortVideoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8EAA21B3AF680039EC71 /* ZJShortVideoTests.swift */; };
 		042F8EB621B3AF680039EC71 /* ZJShortVideoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8EB521B3AF680039EC71 /* ZJShortVideoUITests.swift */; };
+		042F8EC821B3B0F50039EC71 /* ZJBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8EC721B3B0F50039EC71 /* ZJBaseViewController.swift */; };
+		042F8ECA21B3B10B0039EC71 /* ZJNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8EC921B3B10B0039EC71 /* ZJNavigationController.swift */; };
+		042F8ECD21B3B1370039EC71 /* ZJRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8ECC21B3B1370039EC71 /* ZJRootViewController.swift */; };
+		042F8ED221B3B2080039EC71 /* ZJColorsMacor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8ED121B3B2080039EC71 /* ZJColorsMacor.swift */; };
+		042F8ED421B3B3740039EC71 /* ZJFontsMacor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8ED321B3B3740039EC71 /* ZJFontsMacor.swift */; };
+		042F8ED621B3B43E0039EC71 /* ZJDeviceMacor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8ED521B3B43E0039EC71 /* ZJDeviceMacor.swift */; };
+		042F8EDB21B3B6270039EC71 /* ZJHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8EDA21B3B6270039EC71 /* ZJHomeViewController.swift */; };
+		042F8EDD21B3B6350039EC71 /* ZJProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8EDC21B3B6350039EC71 /* ZJProfileViewController.swift */; };
+		042F8EDF21B3B6430039EC71 /* ZJAddVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8EDE21B3B6430039EC71 /* ZJAddVideoViewController.swift */; };
+		042F8EE321B3C7EE0039EC71 /* ZJBaseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8EE221B3C7EE0039EC71 /* ZJBaseCollectionCell.swift */; };
+		042F8EE521B3C8080039EC71 /* ZJBaseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8EE421B3C8080039EC71 /* ZJBaseTableCell.swift */; };
+		042F8EE721B3C8480039EC71 /* ZJHomeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8EE621B3C8480039EC71 /* ZJHomeListCell.swift */; };
+		1C07C5B772CF5FBB979C7BDA /* Pods_ZJShortVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42ACD9C2043EDF62C85FEED8 /* Pods_ZJShortVideo.framework */; };
+		55B2DE2ADB3DD1D3F978F73F /* Pods_ZJShortVideoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94358B6AD564B7C27DC7C6C8 /* Pods_ZJShortVideoTests.framework */; };
+		B4CB0CE07551A51AE8312FDF /* Pods_ZJShortVideoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23DD52F275734F236484C35 /* Pods_ZJShortVideoUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +50,6 @@
 /* Begin PBXFileReference section */
 		042F8E9221B3AF670039EC71 /* ZJShortVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZJShortVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		042F8E9521B3AF670039EC71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		042F8E9721B3AF670039EC71 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		042F8E9A21B3AF670039EC71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		042F8E9C21B3AF680039EC71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		042F8E9F21B3AF680039EC71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +60,27 @@
 		042F8EB121B3AF680039EC71 /* ZJShortVideoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZJShortVideoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		042F8EB521B3AF680039EC71 /* ZJShortVideoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJShortVideoUITests.swift; sourceTree = "<group>"; };
 		042F8EB721B3AF680039EC71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		042F8EC721B3B0F50039EC71 /* ZJBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseViewController.swift; sourceTree = "<group>"; };
+		042F8EC921B3B10B0039EC71 /* ZJNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJNavigationController.swift; sourceTree = "<group>"; };
+		042F8ECC21B3B1370039EC71 /* ZJRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRootViewController.swift; sourceTree = "<group>"; };
+		042F8ED121B3B2080039EC71 /* ZJColorsMacor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJColorsMacor.swift; sourceTree = "<group>"; };
+		042F8ED321B3B3740039EC71 /* ZJFontsMacor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFontsMacor.swift; sourceTree = "<group>"; };
+		042F8ED521B3B43E0039EC71 /* ZJDeviceMacor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDeviceMacor.swift; sourceTree = "<group>"; };
+		042F8EDA21B3B6270039EC71 /* ZJHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJHomeViewController.swift; sourceTree = "<group>"; };
+		042F8EDC21B3B6350039EC71 /* ZJProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJProfileViewController.swift; sourceTree = "<group>"; };
+		042F8EDE21B3B6430039EC71 /* ZJAddVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJAddVideoViewController.swift; sourceTree = "<group>"; };
+		042F8EE221B3C7EE0039EC71 /* ZJBaseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseCollectionCell.swift; sourceTree = "<group>"; };
+		042F8EE421B3C8080039EC71 /* ZJBaseTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseTableCell.swift; sourceTree = "<group>"; };
+		042F8EE621B3C8480039EC71 /* ZJHomeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJHomeListCell.swift; sourceTree = "<group>"; };
+		105FB9AE3BBBA504277333AB /* Pods-ZJShortVideoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZJShortVideoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZJShortVideoTests/Pods-ZJShortVideoTests.release.xcconfig"; sourceTree = "<group>"; };
+		213A7BBA720FDFB159F08EC8 /* Pods-ZJShortVideoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZJShortVideoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZJShortVideoTests/Pods-ZJShortVideoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2FD9FC1CAC392E3D8CC6D54D /* Pods-ZJShortVideoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZJShortVideoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZJShortVideoUITests/Pods-ZJShortVideoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3CBCE239F823E5A1DC3D93C6 /* Pods-ZJShortVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZJShortVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZJShortVideo/Pods-ZJShortVideo.debug.xcconfig"; sourceTree = "<group>"; };
+		42ACD9C2043EDF62C85FEED8 /* Pods_ZJShortVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZJShortVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		94358B6AD564B7C27DC7C6C8 /* Pods_ZJShortVideoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZJShortVideoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2A9439DE948AEA646D57264 /* Pods-ZJShortVideoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZJShortVideoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZJShortVideoUITests/Pods-ZJShortVideoUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D0C2E9892A36118207CF1CC7 /* Pods-ZJShortVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZJShortVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZJShortVideo/Pods-ZJShortVideo.release.xcconfig"; sourceTree = "<group>"; };
+		D23DD52F275734F236484C35 /* Pods_ZJShortVideoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZJShortVideoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C07C5B772CF5FBB979C7BDA /* Pods_ZJShortVideo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55B2DE2ADB3DD1D3F978F73F /* Pods_ZJShortVideoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4CB0CE07551A51AE8312FDF /* Pods_ZJShortVideoUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +118,8 @@
 				042F8EA921B3AF680039EC71 /* ZJShortVideoTests */,
 				042F8EB421B3AF680039EC71 /* ZJShortVideoUITests */,
 				042F8E9321B3AF670039EC71 /* Products */,
+				62CF1C3949E098434DCB03A0 /* Pods */,
+				786DC153DD5B72B34564EFCA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,11 +136,12 @@
 		042F8E9421B3AF670039EC71 /* ZJShortVideo */ = {
 			isa = PBXGroup;
 			children = (
-				042F8E9521B3AF670039EC71 /* AppDelegate.swift */,
-				042F8E9721B3AF670039EC71 /* ViewController.swift */,
-				042F8E9921B3AF670039EC71 /* Main.storyboard */,
-				042F8E9C21B3AF680039EC71 /* Assets.xcassets */,
-				042F8E9E21B3AF680039EC71 /* LaunchScreen.storyboard */,
+				042F8EC321B3B09D0039EC71 /* Appdelegate */,
+				042F8EC421B3B0A80039EC71 /* Modules */,
+				042F8ECE21B3B14E0039EC71 /* Macros */,
+				042F8EC521B3B0C80039EC71 /* BaseVC */,
+				042F8ECF21B3B1660039EC71 /* Resource */,
+				042F8EC621B3B0D70039EC71 /* Other */,
 				042F8EA121B3AF680039EC71 /* Info.plist */,
 			);
 			path = ZJShortVideo;
@@ -125,6 +165,135 @@
 			path = ZJShortVideoUITests;
 			sourceTree = "<group>";
 		};
+		042F8EC321B3B09D0039EC71 /* Appdelegate */ = {
+			isa = PBXGroup;
+			children = (
+				042F8E9521B3AF670039EC71 /* AppDelegate.swift */,
+			);
+			path = Appdelegate;
+			sourceTree = "<group>";
+		};
+		042F8EC421B3B0A80039EC71 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				042F8ED721B3B5FD0039EC71 /* Home */,
+				042F8ED821B3B6030039EC71 /* Add */,
+				042F8ED921B3B60D0039EC71 /* Profile */,
+				042F8ECB21B3B11A0039EC71 /* MainVC */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		042F8EC521B3B0C80039EC71 /* BaseVC */ = {
+			isa = PBXGroup;
+			children = (
+				042F8EE121B3C7CC0039EC71 /* View */,
+				042F8EC721B3B0F50039EC71 /* ZJBaseViewController.swift */,
+				042F8EC921B3B10B0039EC71 /* ZJNavigationController.swift */,
+			);
+			path = BaseVC;
+			sourceTree = "<group>";
+		};
+		042F8EC621B3B0D70039EC71 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				042F8E9921B3AF670039EC71 /* Main.storyboard */,
+				042F8E9E21B3AF680039EC71 /* LaunchScreen.storyboard */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		042F8ECB21B3B11A0039EC71 /* MainVC */ = {
+			isa = PBXGroup;
+			children = (
+				042F8ECC21B3B1370039EC71 /* ZJRootViewController.swift */,
+			);
+			path = MainVC;
+			sourceTree = "<group>";
+		};
+		042F8ECE21B3B14E0039EC71 /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				042F8ED121B3B2080039EC71 /* ZJColorsMacor.swift */,
+				042F8ED321B3B3740039EC71 /* ZJFontsMacor.swift */,
+				042F8ED521B3B43E0039EC71 /* ZJDeviceMacor.swift */,
+			);
+			path = Macros;
+			sourceTree = "<group>";
+		};
+		042F8ECF21B3B1660039EC71 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				042F8E9C21B3AF680039EC71 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		042F8ED721B3B5FD0039EC71 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				042F8EE021B3C7B80039EC71 /* View */,
+				042F8EDA21B3B6270039EC71 /* ZJHomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		042F8ED821B3B6030039EC71 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				042F8EDE21B3B6430039EC71 /* ZJAddVideoViewController.swift */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
+		042F8ED921B3B60D0039EC71 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				042F8EDC21B3B6350039EC71 /* ZJProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		042F8EE021B3C7B80039EC71 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				042F8EE621B3C8480039EC71 /* ZJHomeListCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		042F8EE121B3C7CC0039EC71 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				042F8EE221B3C7EE0039EC71 /* ZJBaseCollectionCell.swift */,
+				042F8EE421B3C8080039EC71 /* ZJBaseTableCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		62CF1C3949E098434DCB03A0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3CBCE239F823E5A1DC3D93C6 /* Pods-ZJShortVideo.debug.xcconfig */,
+				D0C2E9892A36118207CF1CC7 /* Pods-ZJShortVideo.release.xcconfig */,
+				213A7BBA720FDFB159F08EC8 /* Pods-ZJShortVideoTests.debug.xcconfig */,
+				105FB9AE3BBBA504277333AB /* Pods-ZJShortVideoTests.release.xcconfig */,
+				A2A9439DE948AEA646D57264 /* Pods-ZJShortVideoUITests.debug.xcconfig */,
+				2FD9FC1CAC392E3D8CC6D54D /* Pods-ZJShortVideoUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		786DC153DD5B72B34564EFCA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42ACD9C2043EDF62C85FEED8 /* Pods_ZJShortVideo.framework */,
+				94358B6AD564B7C27DC7C6C8 /* Pods_ZJShortVideoTests.framework */,
+				D23DD52F275734F236484C35 /* Pods_ZJShortVideoUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +301,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 042F8EBA21B3AF680039EC71 /* Build configuration list for PBXNativeTarget "ZJShortVideo" */;
 			buildPhases = (
+				B2497EB10CA239E5C67213D1 /* [CP] Check Pods Manifest.lock */,
 				042F8E8E21B3AF670039EC71 /* Sources */,
 				042F8E8F21B3AF670039EC71 /* Frameworks */,
 				042F8E9021B3AF670039EC71 /* Resources */,
+				4561A246F307174F09940353 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -149,6 +320,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 042F8EBD21B3AF680039EC71 /* Build configuration list for PBXNativeTarget "ZJShortVideoTests" */;
 			buildPhases = (
+				553941CD330FAF3C3EAE5898 /* [CP] Check Pods Manifest.lock */,
 				042F8EA221B3AF680039EC71 /* Sources */,
 				042F8EA321B3AF680039EC71 /* Frameworks */,
 				042F8EA421B3AF680039EC71 /* Resources */,
@@ -167,6 +339,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 042F8EC021B3AF680039EC71 /* Build configuration list for PBXNativeTarget "ZJShortVideoUITests" */;
 			buildPhases = (
+				6E02E3C255624E75655E490E /* [CP] Check Pods Manifest.lock */,
 				042F8EAD21B3AF680039EC71 /* Sources */,
 				042F8EAE21B3AF680039EC71 /* Frameworks */,
 				042F8EAF21B3AF680039EC71 /* Resources */,
@@ -187,6 +360,7 @@
 		042F8E8A21B3AF670039EC71 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = ZJ;
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "邓志坚";
@@ -251,13 +425,119 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4561A246F307174F09940353 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ZJShortVideo/Pods-ZJShortVideo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZJShortVideo/Pods-ZJShortVideo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		553941CD330FAF3C3EAE5898 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZJShortVideoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6E02E3C255624E75655E490E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZJShortVideoUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2497EB10CA239E5C67213D1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZJShortVideo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		042F8E8E21B3AF670039EC71 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				042F8E9821B3AF670039EC71 /* ViewController.swift in Sources */,
+				042F8EC821B3B0F50039EC71 /* ZJBaseViewController.swift in Sources */,
+				042F8EDD21B3B6350039EC71 /* ZJProfileViewController.swift in Sources */,
+				042F8EDF21B3B6430039EC71 /* ZJAddVideoViewController.swift in Sources */,
+				042F8EDB21B3B6270039EC71 /* ZJHomeViewController.swift in Sources */,
+				042F8ED421B3B3740039EC71 /* ZJFontsMacor.swift in Sources */,
 				042F8E9621B3AF670039EC71 /* AppDelegate.swift in Sources */,
+				042F8EE521B3C8080039EC71 /* ZJBaseTableCell.swift in Sources */,
+				042F8ECA21B3B10B0039EC71 /* ZJNavigationController.swift in Sources */,
+				042F8ECD21B3B1370039EC71 /* ZJRootViewController.swift in Sources */,
+				042F8ED221B3B2080039EC71 /* ZJColorsMacor.swift in Sources */,
+				042F8EE321B3C7EE0039EC71 /* ZJBaseCollectionCell.swift in Sources */,
+				042F8EE721B3C8480039EC71 /* ZJHomeListCell.swift in Sources */,
+				042F8ED621B3B43E0039EC71 /* ZJDeviceMacor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,11 +710,13 @@
 		};
 		042F8EBB21B3AF680039EC71 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3CBCE239F823E5A1DC3D93C6 /* Pods-ZJShortVideo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R65337KS8W;
 				INFOPLIST_FILE = ZJShortVideo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -448,11 +730,13 @@
 		};
 		042F8EBC21B3AF680039EC71 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0C2E9892A36118207CF1CC7 /* Pods-ZJShortVideo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R65337KS8W;
 				INFOPLIST_FILE = ZJShortVideo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -466,6 +750,7 @@
 		};
 		042F8EBE21B3AF680039EC71 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 213A7BBA720FDFB159F08EC8 /* Pods-ZJShortVideoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -487,6 +772,7 @@
 		};
 		042F8EBF21B3AF680039EC71 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 105FB9AE3BBBA504277333AB /* Pods-ZJShortVideoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -508,6 +794,7 @@
 		};
 		042F8EC121B3AF680039EC71 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2A9439DE948AEA646D57264 /* Pods-ZJShortVideoUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -528,6 +815,7 @@
 		};
 		042F8EC221B3AF680039EC71 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2FD9FC1CAC392E3D8CC6D54D /* Pods-ZJShortVideoUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
