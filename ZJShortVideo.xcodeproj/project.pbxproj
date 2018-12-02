@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040EA8C421B424E30090E2CC /* ZJCaptureVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040EA8C321B424E30090E2CC /* ZJCaptureVideoView.swift */; };
 		042F8E9621B3AF670039EC71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F8E9521B3AF670039EC71 /* AppDelegate.swift */; };
 		042F8E9B21B3AF670039EC71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042F8E9921B3AF670039EC71 /* Main.storyboard */; };
 		042F8E9D21B3AF680039EC71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 042F8E9C21B3AF680039EC71 /* Assets.xcassets */; };
@@ -53,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040EA8C221B423F00090E2CC /* ZJShortVideo_bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZJShortVideo_bridge.h; sourceTree = "<group>"; };
+		040EA8C321B424E30090E2CC /* ZJCaptureVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCaptureVideoView.swift; sourceTree = "<group>"; };
 		042F8E9221B3AF670039EC71 /* ZJShortVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZJShortVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		042F8E9521B3AF670039EC71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		042F8E9A21B3AF670039EC71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -187,7 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				042F8ED721B3B5FD0039EC71 /* Home */,
-				042F8ED821B3B6030039EC71 /* EditVideo */,
+				042F8ED821B3B6030039EC71 /* Video */,
 				042F8ED921B3B60D0039EC71 /* Profile */,
 				042F8ECB21B3B11A0039EC71 /* MainVC */,
 			);
@@ -228,6 +231,7 @@
 				042F8ED321B3B3740039EC71 /* ZJFontsMacor.swift */,
 				042F8ED521B3B43E0039EC71 /* ZJDeviceMacor.swift */,
 				045803E021B4128200A9E336 /* ZJCommon.swift */,
+				040EA8C221B423F00090E2CC /* ZJShortVideo_bridge.h */,
 			);
 			path = Macros;
 			sourceTree = "<group>";
@@ -249,14 +253,14 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		042F8ED821B3B6030039EC71 /* EditVideo */ = {
+		042F8ED821B3B6030039EC71 /* Video */ = {
 			isa = PBXGroup;
 			children = (
 				042F8EDE21B3B6430039EC71 /* ZJAddVideoViewController.swift */,
 				045803E221B4141E00A9E336 /* Controller */,
 				045803DD21B40AB600A9E336 /* View */,
 			);
-			path = EditVideo;
+			path = Video;
 			sourceTree = "<group>";
 		};
 		042F8ED921B3B60D0039EC71 /* Profile */ = {
@@ -287,6 +291,7 @@
 		045803DD21B40AB600A9E336 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				040EA8C321B424E30090E2CC /* ZJCaptureVideoView.swift */,
 				045803DE21B40C0900A9E336 /* ZJEditVideoHeaderView.swift */,
 				045803E321B414C800A9E336 /* ZJEditVideoFooterView.swift */,
 			);
@@ -467,6 +472,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ZJShortVideo/Pods-ZJShortVideo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
@@ -475,6 +481,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GPUImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
@@ -566,6 +573,7 @@
 				045803DF21B40C0900A9E336 /* ZJEditVideoHeaderView.swift in Sources */,
 				045803E121B4128200A9E336 /* ZJCommon.swift in Sources */,
 				042F8ED421B3B3740039EC71 /* ZJFontsMacor.swift in Sources */,
+				040EA8C421B424E30090E2CC /* ZJCaptureVideoView.swift in Sources */,
 				042F8E9621B3AF670039EC71 /* AppDelegate.swift in Sources */,
 				042F8EE521B3C8080039EC71 /* ZJBaseTableCell.swift in Sources */,
 				042F8ECA21B3B10B0039EC71 /* ZJNavigationController.swift in Sources */,
@@ -759,8 +767,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = codeDeng.ZJShortVideo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codeDeng.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = ZJShortVideo/Macros/ZJShortVideo_bridge.h;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -781,8 +790,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = codeDeng.ZJShortVideo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codeDeng.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = ZJShortVideo/Macros/ZJShortVideo_bridge.h;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

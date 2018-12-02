@@ -9,6 +9,7 @@ target 'ZJShortVideo' do
   pod 'Alamofire'
   pod 'SnapKit'
   pod 'Kingfisher'
+  pod 'GPUImage'
   
   target 'ZJShortVideoTests' do
     inherit! :search_paths

@@ -16,9 +16,13 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
         captureBtn.setImage(kImageName("capture_icon"), for: .normal)
         return captureBtn
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let videoView = ZJCaptureVideoView.init(frame: self.view.frame)
+        
+        view.addSubview(videoView)
         
         setUpAllView()
     }
