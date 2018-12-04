@@ -11,17 +11,28 @@ import GPUImage
 
 class ZJCaptureVideoView: UIView {
 
-    lazy var videoCamera: GPUImageVideoCamera = {
-        let videoCamera = GPUImageVideoCamera(sessionPreset: AVCaptureSession.Preset.hd1280x720.rawValue, cameraPosition: .front)
-
-        
+    lazy var videoCamera : GPUImageVideoCamera = {
+        let videoCamera = GPUImageVideoCamera(sessionPreset: AVCaptureSession.Preset.high.rawValue, cameraPosition: .front)
         videoCamera?.outputImageOrientation = .portrait
         videoCamera?.addAudioInputsAndOutputs()
         videoCamera?.horizontallyMirrorRearFacingCamera = false
         videoCamera?.horizontallyMirrorFrontFacingCamera = true
         return videoCamera!
     }()
-    var filter: GPUImageFilter?
+    fileprivate lazy var showView: GPUImageView  = {
+        let showView = GPUImageView(frame: self.bounds)
+        return showView
+    }()
+    var filter: GPUImageFilter = {
+        let filter = GPUImageFilter()
+        return filter
+    }()
+    let saturationFilter = GPUImageSaturationFilter() // 饱和
+    let bilateralFilter = GPUImageBilateralFilter() // 磨皮
+    let brightnessFilter = GPUImageBrightnessFilter() // 美白
+    let exposureFilter = GPUImageExposureFilter() // 曝光
+    
+    var beautifulFilter = GPUImageFilterGroup()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,6 +41,8 @@ class ZJCaptureVideoView: UIView {
     }
     
     func setUpVideoCamera() {
+        
+        addSubview(showView)
         try? videoCamera.inputCamera.lockForConfiguration()
         // 自动对焦
         if (videoCamera.inputCamera.isFocusModeSupported(.autoFocus)) {
@@ -43,8 +56,28 @@ class ZJCaptureVideoView: UIView {
         if (videoCamera.inputCamera.isWhiteBalanceModeSupported(.autoWhiteBalance)) {
             videoCamera.inputCamera.whiteBalanceMode = .continuousAutoWhiteBalance
         }
+        
+        ///防止允许声音通过的情况下，避免录制第一帧黑屏闪屏
+        videoCamera.addAudioInputsAndOutputs()
+        //设置GPUImage的响应链
+        videoCamera.addTarget(filter)
+        // 将滤镜添加到显示的 View 上
+        filter.addTarget(showView)
+        
         videoCamera.inputCamera.unlockForConfiguration()
+        // 开始捕获采集视频
         videoCamera.startCapture()
+    }
+    
+    
+    func stopVideoCamera() {
+        videoCamera.stopCapture()
+        filter.removeAllTargets()
+    }
+    
+    deinit {
+        stopVideoCamera()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

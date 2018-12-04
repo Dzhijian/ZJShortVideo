@@ -23,12 +23,12 @@ class ZJPushVideoViewController: ZJBaseViewController {
         return footerView
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpAllView()
         
     }
-    
     func setUpAllView() {
         
         view.addSubview(self.headerView)
