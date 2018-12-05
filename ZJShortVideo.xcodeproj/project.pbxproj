@@ -31,6 +31,7 @@
 		045803E121B4128200A9E336 /* ZJCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045803E021B4128200A9E336 /* ZJCommon.swift */; };
 		045803E421B414C800A9E336 /* ZJEditVideoFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045803E321B414C800A9E336 /* ZJEditVideoFooterView.swift */; };
 		045803E821B418BF00A9E336 /* ZJCaptureVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045803E721B418BF00A9E336 /* ZJCaptureVideoViewController.swift */; };
+		048FBF5721B8332700B74C5A /* ZJCaptureBotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FBF5621B8332700B74C5A /* ZJCaptureBotView.swift */; };
 		1C07C5B772CF5FBB979C7BDA /* Pods_ZJShortVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42ACD9C2043EDF62C85FEED8 /* Pods_ZJShortVideo.framework */; };
 		55B2DE2ADB3DD1D3F978F73F /* Pods_ZJShortVideoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94358B6AD564B7C27DC7C6C8 /* Pods_ZJShortVideoTests.framework */; };
 		B4CB0CE07551A51AE8312FDF /* Pods_ZJShortVideoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23DD52F275734F236484C35 /* Pods_ZJShortVideoUITests.framework */; };
@@ -85,6 +86,7 @@
 		045803E021B4128200A9E336 /* ZJCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCommon.swift; sourceTree = "<group>"; };
 		045803E321B414C800A9E336 /* ZJEditVideoFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJEditVideoFooterView.swift; sourceTree = "<group>"; };
 		045803E721B418BF00A9E336 /* ZJCaptureVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCaptureVideoViewController.swift; sourceTree = "<group>"; };
+		048FBF5621B8332700B74C5A /* ZJCaptureBotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCaptureBotView.swift; sourceTree = "<group>"; };
 		105FB9AE3BBBA504277333AB /* Pods-ZJShortVideoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZJShortVideoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZJShortVideoTests/Pods-ZJShortVideoTests.release.xcconfig"; sourceTree = "<group>"; };
 		213A7BBA720FDFB159F08EC8 /* Pods-ZJShortVideoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZJShortVideoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZJShortVideoTests/Pods-ZJShortVideoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2FD9FC1CAC392E3D8CC6D54D /* Pods-ZJShortVideoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZJShortVideoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZJShortVideoUITests/Pods-ZJShortVideoUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				040EA8C321B424E30090E2CC /* ZJCaptureVideoView.swift */,
 				045803DE21B40C0900A9E336 /* ZJEditVideoHeaderView.swift */,
 				045803E321B414C800A9E336 /* ZJEditVideoFooterView.swift */,
+				048FBF5621B8332700B74C5A /* ZJCaptureBotView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				042F8ECA21B3B10B0039EC71 /* ZJNavigationController.swift in Sources */,
 				042F8ECD21B3B1370039EC71 /* ZJRootViewController.swift in Sources */,
 				042F8ED221B3B2080039EC71 /* ZJColorsMacor.swift in Sources */,
+				048FBF5721B8332700B74C5A /* ZJCaptureBotView.swift in Sources */,
 				042F8EE321B3C7EE0039EC71 /* ZJBaseCollectionCell.swift in Sources */,
 				042F8EE721B3C8480039EC71 /* ZJHomeListCell.swift in Sources */,
 				042F8ED621B3B43E0039EC71 /* ZJDeviceMacor.swift in Sources */,

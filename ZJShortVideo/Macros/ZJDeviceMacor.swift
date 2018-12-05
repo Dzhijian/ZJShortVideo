@@ -14,6 +14,9 @@ import Kingfisher
 let kScreenW = UIScreen.main.bounds.size.width
 let kScreenH = UIScreen.main.bounds.size.height
 
+/// 拍摄按钮的红色
+let kCaptureBtnRedColor = kRGBAColor(234, 67, 89)
+
 // 判断是否为 iPhone X
 let kisIphoneX = kScreenH >= 812 ? true : false
 
