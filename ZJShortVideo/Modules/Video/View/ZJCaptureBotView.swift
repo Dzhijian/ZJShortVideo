@@ -76,11 +76,10 @@ class ZJCaptureBotView: UIView {
     
     func btnBgViewAnimation() {
         
-        UIView.animate(withDuration: 0.5, delay: 0, options: [.repeat, .autoreverse], animations: {
-            self.captureBtnBgView.layer.borderWidth = AdaptW(3);
+        UIView.animate(withDuration: 0.25, delay: 0, options: [.repeat, .autoreverse], animations: {
+            self.captureBtnBgView.transform = CGAffineTransform(scaleX: 1.8, y: 1.8)
         }) { (isFinish) in
-            self.captureBtnBgView.layer.borderWidth = AdaptW(6)
-            
+        
         }
     }
     
