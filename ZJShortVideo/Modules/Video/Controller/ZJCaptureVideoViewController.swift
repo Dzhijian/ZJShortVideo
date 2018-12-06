@@ -12,7 +12,7 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
 
     /// 捕获按钮
     var captureBotView : ZJCaptureBotView = {
-        let captureBotView = ZJCaptureBotView.init(frame: .zero)
+        let captureBotView = ZJCaptureBotView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: AdaptW(100)))
         return captureBotView
     }()
 

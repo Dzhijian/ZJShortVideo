@@ -28,8 +28,9 @@ class ZJCaptureBotView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         addSubview(captureBtnBgView)
-        captureBtnBgView.addSubview(captureBtn)
+        addSubview(captureBtn)
         
         captureBtnBgView.snp.makeConstraints { (make) in
             make.center.equalTo(self.snp.center)
@@ -50,30 +51,35 @@ class ZJCaptureBotView: UIView {
             UIView.animate(withDuration: 0.25, animations: {
                 self.captureBtn.layer.cornerRadius = AdaptW(5)
                 self.captureBtn.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-            }) { (isSuccess) in
-                self.btnBgViewAnimation()
+                self.captureBtnBgView.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
+            }) { (isFinish) in
+                if isFinish { self.btnBgViewAnimation() }
             }
             
-            
+//            UIView.animate(withDuration: 0.5, delay: 0, options: [.repeat, .curveLinear], animations: {
+//                self.captureBtnBgView.layer.borderWidth = AdaptW(3);
+//            }) { (isFinish) in
+//                 self.captureBtnBgView.layer.borderWidth = AdaptW(6)
+//            }
             
         }else{
             
             UIView.animate(withDuration: 0.25, animations: {
                 self.captureBtn.layer.cornerRadius = AdaptW(30);
                 self.captureBtn.transform = CGAffineTransform(scaleX: 1, y: 1)
-            }) { (isSuccess) in
+                self.captureBtnBgView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }) { (isFinish) in
                 
             }
         }
     }
     
     func btnBgViewAnimation() {
-        UIView.animate(withDuration: 0.25, delay: 0.25, options: .repeat, animations: {
-            self.captureBtnBgView.layer.borderWidth = AdaptW(12);
-            self.captureBtnBgView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-        }) { (isSuccess) in
-            self.captureBtnBgView.layer.borderWidth = AdaptW(6);
-            self.captureBtnBgView.transform = CGAffineTransform(scaleX: 1, y: 1)
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.repeat, .autoreverse], animations: {
+            self.captureBtnBgView.layer.borderWidth = AdaptW(3);
+        }) { (isFinish) in
+            self.captureBtnBgView.layer.borderWidth = AdaptW(6)
             
         }
     }
