@@ -15,11 +15,18 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
         let captureBotView = ZJCaptureBotView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: AdaptW(100)))
         return captureBotView
     }()
+    
+    lazy var captureView : ZJCaptureVideoView = {
+        let videoView = ZJCaptureVideoView.init(frame: self.view.frame)
+        return videoView
+    }()
+    /// 右边的按钮
     lazy var rightToolView : ZJCaptureRightToolView = {
         let rightView = ZJCaptureRightToolView.init(frame: .zero)
         rightView.delegate = self
         return rightView
     }()
+    /// 关闭按钮
     var closeBtn : UIButton = {
         let closeBtn = UIButton.init()
         closeBtn.setImage(kImageName("iconCameraClose_24x24_"), for: .normal)
@@ -34,8 +41,8 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let videoView = ZJCaptureVideoView.init(frame: self.view.frame)
-        view.addSubview(videoView)
+        
+        view.addSubview(captureView)
         setUpAllView()
     }
     
@@ -78,6 +85,7 @@ extension ZJCaptureVideoViewController : ZJCaptureRightToolViewDelegate {
         switch btnType {
         case .overTurn:
             print("翻转")
+            self.captureView.changeDevice()
         case .speed:
             print("快慢速度")
         case .filter:
