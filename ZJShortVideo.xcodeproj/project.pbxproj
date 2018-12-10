@@ -803,7 +803,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.codeDeng.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codeDeng.video;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = ZJShortVideo/Macros/ZJShortVideo_bridge.h;
 				SWIFT_VERSION = 4.2;
@@ -826,7 +826,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.codeDeng.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codeDeng.video;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = ZJShortVideo/Macros/ZJShortVideo_bridge.h;
 				SWIFT_VERSION = 4.2;

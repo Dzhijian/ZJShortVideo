@@ -9,40 +9,90 @@
 import UIKit
 import GPUImage
 
+fileprivate let kTimeInterval : Float = 0.05
+
 class ZJCaptureVideoView: UIView {
 
     /// 初始化 videoCamera
     fileprivate lazy var videoCamera : GPUImageVideoCamera = {
         let videoCamera = GPUImageVideoCamera(sessionPreset: AVCaptureSession.Preset.high.rawValue, cameraPosition: .front)
+        
         return videoCamera!
+    }()
+    /// 捕获按钮
+    lazy var captureBotView : ZJCaptureBotView = {
+        let captureBotView = ZJCaptureBotView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: AdaptW(100)))
+        captureBotView.delegate = self;
+        return captureBotView
     }()
     
     fileprivate lazy var showView: GPUImageView  = {
         let showView = GPUImageView(frame: self.bounds)
         return showView
     }()
+    fileprivate lazy var progressView : UIProgressView = {
+        let progressView = UIProgressView.init()
+        progressView.trackTintColor = kRGBAColor(100, 100, 100, 0.5)
+        progressView.progressTintColor = kOrangeColor
+        progressView.layer.cornerRadius = Adapt(4)
+        progressView.layer.masksToBounds = true
+        return progressView;
+    }()
     
     fileprivate var filter: GPUImageFilter = {
         let filter = GPUImageFilter()
         return filter
     }()
-    let saturationFilter = GPUImageSaturationFilter() // 饱和
-    let bilateralFilter = GPUImageBilateralFilter() // 磨皮
-    let brightnessFilter = GPUImageBrightnessFilter() // 美白
-    let exposureFilter = GPUImageExposureFilter() // 曝光
     
-    var beautifulFilter = GPUImageFilterGroup()
+    fileprivate var videoWriter : GPUImageMovieWriter?
+    
+    let saturationFilter    = GPUImageSaturationFilter() // 饱和
+    let bilateralFilter     = GPUImageBilateralFilter() // 磨皮
+    let brightnessFilter    = GPUImageBrightnessFilter() // 美白
+    let exposureFilter      = GPUImageExposureFilter() // 曝光
+    var beautifulFilter     = GPUImageFilterGroup()
+    /// 视频总时间长度
+    var kTotalTime : Float = 15
+    /// 上次记录的时间
+    var kLastTime : Float = 0
+    /// 当前录制的时间
+    var kCurrentTime : Float = 0
+    /// 是否正在录制
+    var isRecording : Bool = false
+    /// 视频保存路径
+    var videoPath : String?
+    /// 定时器
+    var timer : Timer?
+    /// 保存视频路径
+    var pathArray : [URL] = [URL]()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setUpVideoCamera()
+        /// 配置 videoCamera
+        configvideoCameraView()
+        
     }
     
     func setUpVideoCamera() {
-        
         addSubview(showView)
-        configvideoCameraView()
+        addSubview(progressView)
+        addSubview(captureBotView)
+        progressView.snp.makeConstraints { (make) in
+            make.top.equalTo(Adapt(10));
+            make.left.equalTo(Adapt(10));
+            make.right.equalTo(Adapt(-10));
+            make.height.equalTo(Adapt(8));
+        }
+        
+        captureBotView.snp.makeConstraints { (make) in
+            make.bottom.equalTo(Adapt(-30))
+            make.width.equalTo(kScreenW)
+            make.centerX.equalTo(self.snp.centerX)
+            make.height.equalTo(AdaptW(100))
+        }
     }
     
     /// 配置 videoCamera
@@ -91,6 +141,30 @@ class ZJCaptureVideoView: UIView {
         filter.removeAllTargets()
     }
     
+    /// 开启定时器
+    func startTimer() {
+        // 每0.05秒执行一次
+        self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(kTimeInterval), target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+    }
+    /// 定时器任务
+    @objc func timerAction() {
+        
+        let progress : Float = self.kCurrentTime / self.kTotalTime;
+        if progress >= 1 {
+            self.stopTimer()
+            self.captureBotView.stopRecordVideo(sender: nil)
+        }
+        self.kCurrentTime =  self.kCurrentTime + kTimeInterval
+        self.progressView.progress = progress
+        print("progress" + "\(progress)/")
+        
+    }
+    /// 暂停定时器
+    func stopTimer()  {
+        self.timer?.invalidate()
+        self.timer = nil
+    }
+    
     deinit {
         stopVideoCamera()
         
@@ -100,4 +174,49 @@ class ZJCaptureVideoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+}
+
+extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
+    /// 开始捕获视频
+    func zj_captureBtnStartAction(sender: UIButton?) {
+        print("开始捕获视频")
+        self.videoPath = NSTemporaryDirectory() + "Movie" + "\(pathArray.count)" + ".mov"
+        print(videoPath! + "\(self.videoPath ?? "videoPath 错误")")
+        //如果一个文件已经存在，AVAssetWriter不会让你记录新的帧，所以删除旧的电影
+        unlink(self.videoPath)
+        // 视频文件路径
+        let videoURL : URL = URL.init(fileURLWithPath: self.videoPath!)
+        
+        print(videoURL)
+        self.videoWriter = GPUImageMovieWriter.init(movieURL: videoURL, size: CGSize(width: 720.0, height: 1280.0))
+        videoWriter!.hasAudioTrack = true
+        videoWriter!.encodingLiveVideo = true
+        videoWriter!.shouldPassthroughAudio = true
+        
+        self.filter.addTarget(videoWriter)
+        videoCamera.audioEncodingTarget = videoWriter
+        videoWriter!.startRecording()
+        self.isRecording = true
+        self.startTimer()
+    }
+    
+    /// 暂停捕获视频
+    func zj_captureBtnStopAction(sender: UIButton?) {
+        print("暂停捕获视频")
+        self.stopTimer()
+        videoCamera.audioEncodingTarget = nil
+        print("videoPath:" + "\(String(describing: self.videoPath))")
+        if self.isRecording {
+            videoWriter!.finishRecording()
+            filter.removeTarget(videoWriter)
+            let urlStr : String = "file://" + "\(self.videoPath ?? "")"
+            // 保存当前视频路径
+            self.pathArray.append(URL(string: urlStr)!)
+            self.isRecording = false
+        }
+        
+    }
+    
+    
+    
 }

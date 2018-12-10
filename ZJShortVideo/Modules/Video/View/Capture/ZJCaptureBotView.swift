@@ -8,8 +8,16 @@
 
 import UIKit
 
+protocol ZJCaptureBotViewDeleagte : NSObjectProtocol {
+    /// 捕获按钮开始事件
+    func zj_captureBtnStartAction(sender : UIButton?)
+    /// 捕获按钮暂停事件
+    func zj_captureBtnStopAction(sender : UIButton?)
+}
 class ZJCaptureBotView: UIView {
 
+    weak var delegate : ZJCaptureBotViewDeleagte?
+    
     lazy var captureBtnBgView : UIView = {
         let captureBgView = UIView.init()
         captureBgView.layer.borderColor = kCaptureBtnRedColor.withAlphaComponent(0.5).cgColor
@@ -48,29 +56,36 @@ class ZJCaptureBotView: UIView {
         
         if sender.isSelected {
             
-            UIView.animate(withDuration: 0.25, animations: {
-                self.captureBtn.layer.cornerRadius = AdaptW(5)
-                self.captureBtn.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-                self.captureBtnBgView.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
-            }) { (isFinish) in
-                if isFinish { self.btnBgViewAnimation() }
-            }
-            
-//            UIView.animate(withDuration: 0.5, delay: 0, options: [.repeat, .curveLinear], animations: {
-//                self.captureBtnBgView.layer.borderWidth = AdaptW(3);
-//            }) { (isFinish) in
-//                 self.captureBtnBgView.layer.borderWidth = AdaptW(6)
-//            }
+            self.startRecordVideo(sender: sender)
             
         }else{
             
-            UIView.animate(withDuration: 0.25, animations: {
-                self.captureBtn.layer.cornerRadius = AdaptW(30);
-                self.captureBtn.transform = CGAffineTransform(scaleX: 1, y: 1)
-                self.captureBtnBgView.transform = CGAffineTransform(scaleX: 1, y: 1)
-            }) { (isFinish) in
-                
-            }
+            self.stopRecordVideo(sender: sender)
+        }
+    }
+    
+    /// 开始捕获视频
+    func startRecordVideo(sender : UIButton) {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.captureBtn.layer.cornerRadius = AdaptW(5)
+            self.captureBtn.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+            self.captureBtnBgView.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
+        }) { (isFinish) in
+            if isFinish { self.btnBgViewAnimation() }
+            /// 开始捕获
+            self.delegate?.zj_captureBtnStartAction(sender: sender)
+        }
+    }
+    
+    /// 暂停捕获
+    func stopRecordVideo(sender : UIButton? = nil) {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.captureBtn.layer.cornerRadius = AdaptW(30);
+            self.captureBtn.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.captureBtnBgView.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }) { (isFinish) in
+            /// 暂停捕获
+            self.delegate?.zj_captureBtnStopAction(sender: sender)
         }
     }
     

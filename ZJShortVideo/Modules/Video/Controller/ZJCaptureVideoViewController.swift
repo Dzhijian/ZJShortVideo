@@ -10,11 +10,7 @@ import UIKit
 
 class ZJCaptureVideoViewController: ZJBaseViewController {
 
-    /// 捕获按钮
-    lazy var captureBotView : ZJCaptureBotView = {
-        let captureBotView = ZJCaptureBotView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: AdaptW(100)))
-        return captureBotView
-    }()
+    
     
     lazy var captureView : ZJCaptureVideoView = {
         let videoView = ZJCaptureVideoView.init(frame: self.view.frame)
@@ -51,16 +47,10 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
     }
     
     func setUpAllView() {
-        view.addSubview(captureBotView)
+        
         view.addSubview(closeBtn)
         view.addSubview(rightToolView)
         
-        captureBotView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(Adapt(-30))
-            make.width.equalTo(kScreenW)
-            make.centerX.equalTo(self.view.snp.centerX)
-            make.height.equalTo(AdaptW(100))
-        }
         
         closeBtn.snp.makeConstraints { (make) in
             make.top.equalTo(Adapt(30))
@@ -76,6 +66,7 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
         }
     }
 }
+
 
 
 // MARK: - ZJCaptureRightToolViewDelegate
