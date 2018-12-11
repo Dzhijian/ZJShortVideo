@@ -14,6 +14,7 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
     
     lazy var captureView : ZJCaptureVideoView = {
         let videoView = ZJCaptureVideoView.init(frame: self.view.frame)
+        videoView.delegate = self
         return videoView
     }()
     /// 右边的按钮
@@ -67,6 +68,13 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
     }
 }
 
+
+// MARK: - ZJCaptureVideoViewDelegate
+extension ZJCaptureVideoViewController : ZJCaptureVideoViewDelegate{
+    func zj_captureViewVideoCompleteAction() {
+        
+    }
+}
 
 
 // MARK: - ZJCaptureRightToolViewDelegate

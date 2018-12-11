@@ -13,6 +13,12 @@ protocol ZJCaptureBotViewDeleagte : NSObjectProtocol {
     func zj_captureBtnStartAction(sender : UIButton?)
     /// 捕获按钮暂停事件
     func zj_captureBtnStopAction(sender : UIButton?)
+    /// 删除按钮事件
+    func zj_captureDeleteBtnAction(sender : UIButton?)
+    /// 完成按钮事件
+    func zj_captureCompleteBtnAction(sender : UIButton?)
+    
+    
 }
 class ZJCaptureBotView: UIView {
 
@@ -34,11 +40,35 @@ class ZJCaptureBotView: UIView {
         return captureBtn
     }()
     
+    /// 删除按钮
+    lazy var deleteBtn : UIButton = {
+        let deleteBtn = UIButton.init()
+        deleteBtn.setImage(kImageName("icon_laststep_36x36_"), for: .normal)
+        deleteBtn.isHidden = true
+        deleteBtn.addTarget(self, action: #selector(deleteBtnAction(sender:)), for: .touchUpInside)
+        return deleteBtn
+    }()
+    
+    /// 完成按钮
+    lazy var completeBtn : UIButton = {
+        let completeBtn = UIButton.init()
+        completeBtn.setImage(kImageName("icoLoginCheckMarkSel"), for: .normal)
+        completeBtn.addTarget(self, action: #selector(completeBtnAction(sender:)), for: .touchUpInside)
+        completeBtn.isHidden = true
+        return completeBtn
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        setUpAllView()
+    }
+    
+    func setUpAllView() {
         addSubview(captureBtnBgView)
         addSubview(captureBtn)
+        addSubview(deleteBtn)
+        addSubview(completeBtn)
         
         captureBtnBgView.snp.makeConstraints { (make) in
             make.center.equalTo(self.snp.center)
@@ -48,6 +78,24 @@ class ZJCaptureBotView: UIView {
             make.center.equalTo(captureBtnBgView.snp.center)
             make.width.height.equalTo(AdaptW(60))
         }
+        deleteBtn.snp.makeConstraints { (make) in
+            make.centerY.equalTo(captureBtn.snp.centerY)
+            make.left.equalTo(captureBtn.snp.right).offset(Adapt(20))
+            make.width.equalTo(Adapt(50))
+            make.height.equalTo(Adapt(30))
+        }
+        
+        completeBtn.snp.makeConstraints { (make) in
+            make.centerY.equalTo(captureBtn.snp.centerY)
+            make.left.equalTo(deleteBtn.snp.right).offset(Adapt(15))
+            make.width.equalTo(Adapt(35))
+            make.height.equalTo(Adapt(35))
+        }
+    }
+    
+    func captureToolBtnIsHidden(isHidden : Bool) {
+        deleteBtn.isHidden = isHidden
+        completeBtn.isHidden = isHidden
     }
     
     @objc func captureBtnAction(sender : UIButton) {
@@ -64,6 +112,14 @@ class ZJCaptureBotView: UIView {
         }
     }
     
+    /// 删除事件
+    @objc func deleteBtnAction(sender : UIButton){
+        self.delegate?.zj_captureDeleteBtnAction(sender: sender)
+    }
+    /// 完成事件
+    @objc func completeBtnAction(sender : UIButton){
+        self.delegate?.zj_captureCompleteBtnAction(sender: sender)
+    }
     /// 开始捕获视频
     func startRecordVideo(sender : UIButton) {
         UIView.animate(withDuration: 0.25, animations: {

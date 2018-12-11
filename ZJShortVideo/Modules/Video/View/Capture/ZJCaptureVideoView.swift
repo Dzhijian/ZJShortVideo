@@ -9,10 +9,18 @@
 import UIKit
 import GPUImage
 
+
 fileprivate let kTimeInterval : Float = 0.05
 
-class ZJCaptureVideoView: UIView {
+protocol ZJCaptureVideoViewDelegate : NSObjectProtocol{
 
+    func zj_captureViewVideoCompleteAction()
+}
+
+class ZJCaptureVideoView : UIView {
+    
+    weak var delegate : ZJCaptureVideoViewDelegate?
+    
     /// 初始化 videoCamera
     fileprivate lazy var videoCamera : GPUImageVideoCamera = {
         let videoCamera = GPUImageVideoCamera(sessionPreset: AVCaptureSession.Preset.high.rawValue, cameraPosition: .front)
@@ -180,6 +188,8 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
     /// 开始捕获视频
     func zj_captureBtnStartAction(sender: UIButton?) {
         print("开始捕获视频")
+        
+        captureBotView.captureToolBtnIsHidden(isHidden: true)
         self.videoPath = NSTemporaryDirectory() + "Movie" + "\(pathArray.count)" + ".mov"
         print(videoPath! + "\(self.videoPath ?? "videoPath 错误")")
         //如果一个文件已经存在，AVAssetWriter不会让你记录新的帧，所以删除旧的电影
@@ -204,6 +214,7 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
     func zj_captureBtnStopAction(sender: UIButton?) {
         print("暂停捕获视频")
         self.stopTimer()
+        captureBotView.captureToolBtnIsHidden(isHidden: false)
         videoCamera.audioEncodingTarget = nil
         print("videoPath:" + "\(String(describing: self.videoPath))")
         if self.isRecording {
@@ -217,6 +228,11 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
         
     }
     
+    func zj_captureDeleteBtnAction(sender: UIButton?) {
+        
+    }
     
-    
+    func zj_captureCompleteBtnAction(sender: UIButton?) {
+        self.delegate?.zj_captureViewVideoCompleteAction()
+    }
 }
