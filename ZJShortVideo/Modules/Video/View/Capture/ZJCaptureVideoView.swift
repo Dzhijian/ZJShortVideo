@@ -69,8 +69,6 @@ class ZJCaptureVideoView : UIView {
     var timer : Timer?
     /// 保存视频路径
     var pathArray : [URL] = [URL]()
-    /// 保存视频的临时路径
-    var pathEditArray : [URL] = [URL]()
     /// 当前总进度
     var progressValue : Float = 0
     /// 新增加的进度
@@ -229,11 +227,7 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
             videoWriter!.finishRecording()
             filter.removeTarget(videoWriter)
             let urlStr : String = "file://" + "\(self.videoPath ?? "")"
-            
-            self.pathEditArray.append(URL(string: urlStr)!)
-
-            // 保存当前视频路径
-            self.pathEditArray.append(URL(string: self.videoPath!)!)
+            self.pathArray.append(URL(string: urlStr)!)
             
             // 添加进度条的分割线
             self.progressView.zj_addlineLayer(value: self.progressValue, newValue: self.progressNewValue / self.kTotalTime)
@@ -247,7 +241,7 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
     func zj_captureDeleteBtnAction(sender: UIButton?) {
         
         guard self.pathArray.count == 0 else {
-            self.removeFile(pathStr: (self.pathEditArray.last?.absoluteString)!)
+            self.removeFile(pathStr: (self.pathArray.last?.absoluteString)!)
             self.pathArray.removeLast()
             self.progressView.zj_deleteLineAndValue()
             return
@@ -262,11 +256,13 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
     
     /// 删除文件
     func removeFile(pathStr : String){
-        print("需要删除文件的路径" + pathStr)
+        
         //获得文件管理对象
         let fileManger = FileManager.default
         // 创建一个字符串对象，表示文档目录下的一个图片
-        let sourceUrl = pathStr
+        let sourceUrl = pathStr.replacingOccurrences(of: "file://", with: "")
+        print("需要删除文件的路径" + sourceUrl)
+
         do{
             print("Success to remove file.")
             try fileManger.removeItem(atPath: sourceUrl)
