@@ -9,14 +9,13 @@
 import UIKit
 
 class ZJCaptureVideoViewController: ZJBaseViewController {
-
-    
-    
+    /// 视频捕获的 View
     lazy var captureView : ZJCaptureVideoView = {
         let videoView = ZJCaptureVideoView.init(frame: self.view.frame)
         videoView.delegate = self
         return videoView
     }()
+    
     /// 右边的按钮
     lazy var rightToolView : ZJCaptureRightToolView = {
         let rightView = ZJCaptureRightToolView.init(frame: .zero)
@@ -36,6 +35,16 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
         return true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,7 +60,6 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
         
         view.addSubview(closeBtn)
         view.addSubview(rightToolView)
-        
         
         closeBtn.snp.makeConstraints { (make) in
             make.top.equalTo(Adapt(30))
@@ -72,7 +80,7 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
 // MARK: - ZJCaptureVideoViewDelegate
 extension ZJCaptureVideoViewController : ZJCaptureVideoViewDelegate{
     func zj_captureViewVideoCompleteAction() {
-        
+        self.navigationController?.pushViewController(ZJEditVideoViewController(), animated: true)
     }
 }
 

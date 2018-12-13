@@ -1,15 +1,15 @@
 //
-//  ZJPushVideoViewController.swift
+//  ZJEditVideoViewController.swift
 //  ZJShortVideo
 //
-//  Created by 邓志坚 on 2018/12/2.
+//  Created by 邓志坚 on 2018/12/13.
 //  Copyright © 2018 邓志坚. All rights reserved.
 //
 
 import UIKit
 
+class ZJEditVideoViewController: ZJBaseViewController {
 
-class ZJPushVideoViewController: ZJBaseViewController {
     // 顶部的
     lazy var headerView : ZJEditVideoHeaderView = {
         let headerView = ZJEditVideoHeaderView(frame: CGRect.zero)
@@ -23,6 +23,15 @@ class ZJPushVideoViewController: ZJBaseViewController {
         return footerView
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,5 +52,5 @@ class ZJPushVideoViewController: ZJBaseViewController {
             make.height.equalTo(kisIphoneX ? Adapt(80) : Adapt(60))
         }
     }
-    
+
 }

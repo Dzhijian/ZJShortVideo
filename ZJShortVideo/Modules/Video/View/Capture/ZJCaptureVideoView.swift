@@ -38,12 +38,8 @@ class ZJCaptureVideoView : UIView {
         let showView = GPUImageView(frame: self.bounds)
         return showView
     }()
-    fileprivate lazy var progressView : UIProgressView = {
-        let progressView = UIProgressView.init()
-        progressView.trackTintColor = kRGBAColor(100, 100, 100, 0.5)
-        progressView.progressTintColor = kOrangeColor
-        progressView.layer.cornerRadius = Adapt(4)
-        progressView.layer.masksToBounds = true
+    fileprivate lazy var progressView : ZJVideoProgressView = {
+        let progressView = ZJVideoProgressView.init()
         return progressView;
     }()
     
@@ -73,6 +69,8 @@ class ZJCaptureVideoView : UIView {
     var timer : Timer?
     /// 保存视频路径
     var pathArray : [URL] = [URL]()
+    /// 当前进度
+    var progressValue : Float = 0
     
     
     override init(frame: CGRect) {
@@ -163,7 +161,10 @@ class ZJCaptureVideoView : UIView {
             self.captureBotView.stopRecordVideo(sender: nil)
         }
         self.kCurrentTime =  self.kCurrentTime + kTimeInterval
-        self.progressView.progress = progress
+        self.progressValue = progress
+        //设置进度条进度
+        self.progressView.zj_setProgress(value: progress)
+        
         print("progress" + "\(progress)/")
         
     }
@@ -223,6 +224,8 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
             let urlStr : String = "file://" + "\(self.videoPath ?? "")"
             // 保存当前视频路径
             self.pathArray.append(URL(string: urlStr)!)
+            // 添加进度条的分割线
+            self.progressView.zj_addlineLayer(value: self.progressValue)
             self.isRecording = false
         }
         
