@@ -23,6 +23,10 @@ class ZJVideoProgressView: ZJBaseView {
         let lineArray = NSMutableArray.init()
         return lineArray
     }()
+    lazy var valueArray : NSMutableArray = {
+        let valueArray = NSMutableArray.init()
+        return valueArray
+    }()
     
     override func zj_initView(frame: CGRect) {
         
@@ -36,7 +40,6 @@ class ZJVideoProgressView: ZJBaseView {
         
     }
     
-    
     /// 设置进度
     func zj_setProgress(value : Float) {
         
@@ -45,13 +48,33 @@ class ZJVideoProgressView: ZJBaseView {
     }
 
     /// 添加 layer
-    func zj_addlineLayer(value : Float) {
-        let lineLayer : CALayer = CALayer.init()
-        lineLayer.backgroundColor = kWhiteColor.cgColor;
-        lineLayer.frame = CGRect(x:CGFloat(value) * self.progressView.frame.size.width, y: 0, width: 2, height: self.progressView.frame.size.height)
+    func zj_addlineLayer(value: Float, newValue: Float) {
+        let lineView : UIView = UIView.init()
+        lineView.backgroundColor = kWhiteColor;
+        lineView.frame = CGRect(x:CGFloat(value) * self.progressView.frame.size.width, y: 0, width: 2, height: self.progressView.frame.size.height)
         print(CGFloat(value))
-        self.progressView.layer.addSublayer(lineLayer)
-        lineArray.add(lineLayer)
+        self.progressView.addSubview(lineView)
+        lineArray.add(lineView)
+        print("newValue:" + "\(newValue)")
+        valueArray.add(newValue)
+    }
+    
+    /// 删除
+    func zj_deleteLineAndValue() {
         
+        // 删除分割线
+        for lineView in self.progressView.subviews {
+            let line : UIView = lineArray.lastObject as! UIView
+            if line.isEqual(lineView) {
+                lineArray.removeLastObject()
+                lineView.removeFromSuperview()
+            }
+        }
+        let value : Float = valueArray.lastObject as! Float
+        // 减少对应的进度
+        self.progressView.progress = self.progressView.progress - value
+        valueArray.removeLastObject()
+        
+        super.layoutIfNeeded()
     }
 }

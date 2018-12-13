@@ -36,6 +36,7 @@
 		04D2091C21C2A4AD00877161 /* ZJEditVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2091B21C2A4AD00877161 /* ZJEditVideoViewController.swift */; };
 		04D2091E21C2A65100877161 /* ZJBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2091D21C2A65100877161 /* ZJBaseView.swift */; };
 		04D2092021C2A69B00877161 /* ZJVideoProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2091F21C2A69B00877161 /* ZJVideoProgressView.swift */; };
+		04D2092321C2ACDE00877161 /* ZJCaptureProgressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2092221C2ACDE00877161 /* ZJCaptureProgressModel.swift */; };
 		1C07C5B772CF5FBB979C7BDA /* Pods_ZJShortVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42ACD9C2043EDF62C85FEED8 /* Pods_ZJShortVideo.framework */; };
 		55B2DE2ADB3DD1D3F978F73F /* Pods_ZJShortVideoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94358B6AD564B7C27DC7C6C8 /* Pods_ZJShortVideoTests.framework */; };
 		B4CB0CE07551A51AE8312FDF /* Pods_ZJShortVideoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23DD52F275734F236484C35 /* Pods_ZJShortVideoUITests.framework */; };
@@ -95,6 +96,7 @@
 		04D2091B21C2A4AD00877161 /* ZJEditVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJEditVideoViewController.swift; sourceTree = "<group>"; };
 		04D2091D21C2A65100877161 /* ZJBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseView.swift; sourceTree = "<group>"; };
 		04D2091F21C2A69B00877161 /* ZJVideoProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJVideoProgressView.swift; sourceTree = "<group>"; };
+		04D2092221C2ACDE00877161 /* ZJCaptureProgressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCaptureProgressModel.swift; sourceTree = "<group>"; };
 		105FB9AE3BBBA504277333AB /* Pods-ZJShortVideoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZJShortVideoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZJShortVideoTests/Pods-ZJShortVideoTests.release.xcconfig"; sourceTree = "<group>"; };
 		213A7BBA720FDFB159F08EC8 /* Pods-ZJShortVideoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZJShortVideoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZJShortVideoTests/Pods-ZJShortVideoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2FD9FC1CAC392E3D8CC6D54D /* Pods-ZJShortVideoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZJShortVideoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZJShortVideoUITests/Pods-ZJShortVideoUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				042F8EDE21B3B6430039EC71 /* ZJAddVideoViewController.swift */,
 				045803E221B4141E00A9E336 /* Controller */,
 				045803DD21B40AB600A9E336 /* View */,
+				04D2092121C2ACB100877161 /* Model */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -344,6 +347,14 @@
 				048FBF5B21BAAD5800B74C5A /* ZJCustomBtn.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		04D2092121C2ACB100877161 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04D2092221C2ACDE00877161 /* ZJCaptureProgressModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		62CF1C3949E098434DCB03A0 /* Pods */ = {
@@ -614,6 +625,7 @@
 				045803E121B4128200A9E336 /* ZJCommon.swift in Sources */,
 				042F8ED421B3B3740039EC71 /* ZJFontsMacor.swift in Sources */,
 				048FBF5E21BAB86B00B74C5A /* ZJCaptureRightToolView.swift in Sources */,
+				04D2092321C2ACDE00877161 /* ZJCaptureProgressModel.swift in Sources */,
 				040EA8C421B424E30090E2CC /* ZJCaptureVideoView.swift in Sources */,
 				042F8E9621B3AF670039EC71 /* AppDelegate.swift in Sources */,
 				042F8EE521B3C8080039EC71 /* ZJBaseTableCell.swift in Sources */,
