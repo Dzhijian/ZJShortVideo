@@ -158,7 +158,6 @@ class ZJCaptureVideoView : UIView {
         
         let progress : Float = self.kCurrentTime / self.kTotalTime;
         if progress >= 1 {
-            
             self.stopTimer()
             self.captureBotView.stopRecordVideo(sender: nil)
         }
@@ -170,8 +169,6 @@ class ZJCaptureVideoView : UIView {
         //设置进度条进度
         self.progressView.zj_setProgress(value: progress)
         
-//        print("progress" + "\(progress)/")
-        
     }
     /// 暂停定时器
     func stopTimer()  {
@@ -179,15 +176,85 @@ class ZJCaptureVideoView : UIView {
         self.timer = nil
     }
     
+    /// 完成录制
+    func finishCaptureVideo() {
+        videoCamera.audioEncodingTarget = nil
+        /// 将要保存的文件路径名
+        let format : DateFormatter = DateFormatter.init()
+        format.dateFormat = "yyyyMMddHHmmss"
+        let timeStr = format.string(from: Date.init(timeIntervalSinceNow: 0))
+        
+        let savePathStr : String = NSTemporaryDirectory() + "zj_video" + timeStr + "shortVideo.mp4"
+        
+        
+    }
+    
     deinit {
         stopVideoCamera()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+}
+
+
+// MARK: - 音视频处理
+extension ZJCaptureVideoView {
+    /// 音视频合成
+    func audioVideoSynthesis(urlArr : [URL], outPutUrl : String) {
+        
+        // 创建音视频合成对象
+        let composition : AVMutableComposition = AVMutableComposition.init()
+        // 创建音视通道容器
+        let audioTrack : AVMutableCompositionTrack = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)!
+        // 创建视频通道容器
+        let videoTrack : AVMutableCompositionTrack = composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)!
+        
+        let totalDuration : CMTime = CMTime.zero
+        
+        for (index,item) in urlArr.enumerated() {
+            print(index)
+            let options : [String : Any] = [AVURLAssetPreferPreciseDurationAndTimingKey : true]
+            let asset : AVAsset = AVURLAsset.init(url: item, options: options)
+            //获取AVAsset中的音频
+            let assetAudioTrack : AVAssetTrack = asset.tracks(withMediaType: .audio).first!
+            // 向通道内加入音频
+            do{
+                try audioTrack.insertTimeRange(CMTimeRangeMake(start: .zero, duration: asset.duration), of: assetAudioTrack, at: totalDuration)
+            }catch {
+                print("第" + "\(index)" + "段音频插入失败")
+            }
+        
+            //获取AVAsset中的视频
+            let assetVideoTrack : AVAssetTrack = asset.tracks(withMediaType: .video).first!
+            // 向通道内加入视频
+            do{
+                try videoTrack.insertTimeRange(CMTimeRangeMake(start: .zero, duration: asset.duration), of: assetVideoTrack, at: totalDuration)
+            }catch {
+                print("第" + "\(index)" + "段视频插入失败")
+            }
+
+            
+            // 音视频导出
+            let exprotSession : AVAssetExportSession = AVAssetExportSession.init(asset: composition, presetName: AVAssetExportPreset1280x720)!
+        
+            exprotSession.outputURL = URL.init(string: outPutUrl)
+            exprotSession.outputFileType = AVFileType.mp4
+            exprotSession.shouldOptimizeForNetworkUse = true
+            exprotSession.exportAsynchronously {
+                DispatchQueue.main.async {
+                    self.videoCamera.stopCapture()
+                    
+                }
+            }
+            
+            
+            
+        }
+        
+    }
 }
 
 extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{

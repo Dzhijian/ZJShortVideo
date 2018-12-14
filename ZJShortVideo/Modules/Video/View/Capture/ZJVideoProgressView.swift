@@ -72,7 +72,7 @@ class ZJVideoProgressView: ZJBaseView {
         }
         let value : Float = valueArray.lastObject as! Float
         // 减少对应的进度
-        self.progressView.progress = self.progressView.progress - value
+        self.progressView.setProgress(self.progressView.progress - value, animated: true)
         valueArray.removeLastObject()
         
         super.layoutIfNeeded()
