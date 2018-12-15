@@ -79,9 +79,10 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
 
 // MARK: - ZJCaptureVideoViewDelegate
 extension ZJCaptureVideoViewController : ZJCaptureVideoViewDelegate{
-    func zj_captureViewVideoCompleteAction() {
-        
-        self.navigationController?.pushViewController(ZJEditVideoViewController(), animated: true)
+    func zj_captureViewVideoCompleteAction(videoURL: URL?) {
+        let editVideo = ZJEditVideoViewController()
+        editVideo.videoURL = videoURL
+        self.navigationController?.pushViewController(editVideo, animated: true)
     }
 }
 

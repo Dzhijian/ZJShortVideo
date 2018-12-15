@@ -18,7 +18,9 @@ class ZJBaseViewController: UIViewController {
     }
     
     deinit {
+        debugPrint("**********************************************")
         debugPrint(String(describing: type(of:self)) + " deinit")
+        debugPrint("**********************************************")
     }
 
 }

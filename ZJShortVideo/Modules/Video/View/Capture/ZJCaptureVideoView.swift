@@ -13,8 +13,8 @@ import GPUImage
 fileprivate let kTimeInterval : Float = 0.05
 
 protocol ZJCaptureVideoViewDelegate : NSObjectProtocol{
-
-    func zj_captureViewVideoCompleteAction()
+    
+    func zj_captureViewVideoCompleteAction(videoURL: URL?)
 }
 
 class ZJCaptureVideoView : UIView {
@@ -108,7 +108,7 @@ class ZJCaptureVideoView : UIView {
         videoCamera.addAudioInputsAndOutputs()
         videoCamera.horizontallyMirrorRearFacingCamera = false
         videoCamera.horizontallyMirrorFrontFacingCamera = true
-
+        
         try? videoCamera.inputCamera.lockForConfiguration()
         // 自动对焦
         if (videoCamera.inputCamera.isFocusModeSupported(.autoFocus)) {
@@ -178,14 +178,16 @@ class ZJCaptureVideoView : UIView {
     
     /// 完成录制
     func finishCaptureVideo() {
+        
         videoCamera.audioEncodingTarget = nil
         /// 将要保存的文件路径名
         let format : DateFormatter = DateFormatter.init()
         format.dateFormat = "yyyyMMddHHmmss"
         let timeStr = format.string(from: Date.init(timeIntervalSinceNow: 0))
         
-        let savePathStr : String = NSTemporaryDirectory() + "zj_video" + timeStr + "shortVideo.mp4"
+        let outputPathStr : String = self.getVideoMargeFilePath()
         
+        self.zj_videoCompleteAudioVideoSynthesis(urlArr: pathArray, outPutURLStr: outputPathStr)
         
     }
     
@@ -196,64 +198,93 @@ class ZJCaptureVideoView : UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
 }
 
 
 // MARK: - 音视频处理
 extension ZJCaptureVideoView {
     /// 音视频合成
-    func audioVideoSynthesis(urlArr : [URL], outPutUrl : String) {
+    func zj_videoCompleteAudioVideoSynthesis(urlArr : [URL], outPutURLStr : String) {
         
         // 创建音视频合成对象
-        let composition : AVMutableComposition = AVMutableComposition.init()
+        let composition = AVMutableComposition()
         // 创建音视通道容器
-        let audioTrack : AVMutableCompositionTrack = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)!
+        let audioTrack = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)
         // 创建视频通道容器
-        let videoTrack : AVMutableCompositionTrack = composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)!
+        let videoTrack = composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)
+        // 视频时间
+        var totalDuration = CMTime.zero
         
-        let totalDuration : CMTime = CMTime.zero
-        
+        // 遍历合成所有音视频
         for (index,item) in urlArr.enumerated() {
-            print(index)
-            let options : [String : Any] = [AVURLAssetPreferPreciseDurationAndTimingKey : true]
-            let asset : AVAsset = AVURLAsset.init(url: item, options: options)
-            //获取AVAsset中的音频
-            let assetAudioTrack : AVAssetTrack = asset.tracks(withMediaType: .audio).first!
-            // 向通道内加入音频
+            
+            print("第" + "\(index)" + "段 : " + "\(item)")
             do{
-                try audioTrack.insertTimeRange(CMTimeRangeMake(start: .zero, duration: asset.duration), of: assetAudioTrack, at: totalDuration)
-            }catch {
-                print("第" + "\(index)" + "段音频插入失败")
+                let options = [AVURLAssetPreferPreciseDurationAndTimingKey : true]
+                let asset = AVURLAsset.init(url: item, options: options)
+                
+                //获取AVAsset中的音频
+                let assetAudioTrack = asset.tracks(withMediaType: AVMediaType.audio).first
+                // 向通道内加入音频
+                try audioTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: asset.duration), of: assetAudioTrack!, at: totalDuration)
+                
+                //获取AVAsset中的视频
+                let assetVideoTrack = asset.tracks(withMediaType: AVMediaType.video).first
+                // 向通道内加入视频
+                try videoTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: asset.duration), of: assetVideoTrack!, at: totalDuration)
+                
+                totalDuration = CMTimeAdd(totalDuration, asset.duration);
+            } catch {
+                print("第" + "\(index)" + "段音视频插入失败")
             }
-        
-            //获取AVAsset中的视频
-            let assetVideoTrack : AVAssetTrack = asset.tracks(withMediaType: .video).first!
-            // 向通道内加入视频
-            do{
-                try videoTrack.insertTimeRange(CMTimeRangeMake(start: .zero, duration: asset.duration), of: assetVideoTrack, at: totalDuration)
-            }catch {
-                print("第" + "\(index)" + "段视频插入失败")
-            }
-
-            
-            // 音视频导出
-            let exprotSession : AVAssetExportSession = AVAssetExportSession.init(asset: composition, presetName: AVAssetExportPreset1280x720)!
-        
-            exprotSession.outputURL = URL.init(string: outPutUrl)
-            exprotSession.outputFileType = AVFileType.mp4
-            exprotSession.shouldOptimizeForNetworkUse = true
-            exprotSession.exportAsynchronously {
-                DispatchQueue.main.async {
-                    self.videoCamera.stopCapture()
-                    
-                }
-            }
-            
-            
-            
         }
         
+        
+        // 音视频合成导出
+        let exprotSession : AVAssetExportSession = AVAssetExportSession.init(asset: composition, presetName: AVAssetExportPresetHighestQuality)!
+        // 输出地址
+        let saveUrl = URL.init(fileURLWithPath: outPutURLStr)
+        exprotSession.outputURL = saveUrl
+        // 输出类型
+        exprotSession.outputFileType = AVFileType.mp4
+        exprotSession.shouldOptimizeForNetworkUse = true
+        // 合成完毕
+        exprotSession.exportAsynchronously {
+            // 返回主线程继续操作
+            DispatchQueue.main.async {
+                self.videoCamera.stopCapture()
+                
+                if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(outPutURLStr)) {
+                    //将视频保存到相册
+                    UISaveVideoAtPathToSavedPhotosAlbum(outPutURLStr, self, #selector(self.didFinishSavingWithError(path:error:contextInfo:)), nil);
+                }
+                self.delegate?.zj_captureViewVideoCompleteAction(videoURL: URL(string: outPutURLStr))
+            }
+        }
+        
+        
+    }
+    
+    @objc func didFinishSavingWithError (path pth:String ,error:Error?,contextInfo:Any?) {
+        if error == nil {
+            print("保存视频到本地成功")
+        }else{
+            print("保存视频到本地失败")
+        }
+    }
+    
+    //获取合成视频之后的路径  我这里直接将合成后的视频 移动到系统相册
+    func getVideoMargeFilePath() -> String {
+        let tempath = NSTemporaryDirectory() + "/videoFolder"
+        if FileManager.default.fileExists(atPath: tempath) == false {
+            try! FileManager.default.createDirectory(atPath: tempath, withIntermediateDirectories: true, attributes: nil)
+        }
+        let dataFormatter =  DateFormatter()
+        dataFormatter.dateFormat = "yyyyMMddHHmmss"
+        let nowstr = dataFormatter.string(from: Date())
+        let pth = tempath + "/\(nowstr)" + "merge.mp4"
+        return pth
     }
 }
 
@@ -263,10 +294,11 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
         print("开始捕获视频")
         
         captureBotView.captureToolBtnIsHidden(isHidden: true)
-        self.videoPath = NSTemporaryDirectory() + "Movie" + "\(pathArray.count)" + ".mov"
+        self.videoPath = NSHomeDirectory() + "/tmp/movie\(pathArray.count).mov" //NSTemporaryDirectory() + "movie" + "\(pathArray.count)" + ".mov"
         print(videoPath! + "\(self.videoPath ?? "videoPath 错误")")
         //如果一个文件已经存在，AVAssetWriter不会让你记录新的帧，所以删除旧的电影
         unlink(self.videoPath)
+
         // 视频文件路径
         let videoURL : URL = URL.init(fileURLWithPath: self.videoPath!)
         
@@ -293,8 +325,8 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
         if self.isRecording {
             videoWriter!.finishRecording()
             filter.removeTarget(videoWriter)
-            let urlStr : String = "file://" + "\(self.videoPath ?? "")"
-            self.pathArray.append(URL(string: urlStr)!)
+            let urlStr : String = self.videoPath ?? ""
+            self.pathArray.append(URL(fileURLWithPath: urlStr))
             
             // 添加进度条的分割线
             self.progressView.zj_addlineLayer(value: self.progressValue, newValue: self.progressNewValue / self.kTotalTime)
@@ -304,7 +336,7 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
         }
         
     }
-    
+    /// 删除视频片段
     func zj_captureDeleteBtnAction(sender: UIButton?) {
         
         guard self.pathArray.count == 0 else {
@@ -315,9 +347,9 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
         }
         
     }
-    
+    /// 完成视频录制
     func zj_captureCompleteBtnAction(sender: UIButton?) {
-        self.delegate?.zj_captureViewVideoCompleteAction()
+        self.finishCaptureVideo()
     }
     
     
@@ -329,7 +361,7 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
         // 创建一个字符串对象，表示文档目录下的一个图片
         let sourceUrl = pathStr.replacingOccurrences(of: "file://", with: "")
         print("需要删除文件的路径" + sourceUrl)
-
+        
         do{
             print("Success to remove file.")
             try fileManger.removeItem(atPath: sourceUrl)

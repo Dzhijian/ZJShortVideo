@@ -10,7 +10,7 @@ target 'ZJShortVideo' do
   pod 'SnapKit'
   pod 'Kingfisher'
   pod 'GPUImage'
-  
+  pod 'SVProgressHUD'
   target 'ZJShortVideoTests' do
     inherit! :search_paths
     # Pods for testing

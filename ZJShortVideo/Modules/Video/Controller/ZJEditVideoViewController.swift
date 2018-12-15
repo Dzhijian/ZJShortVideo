@@ -9,6 +9,12 @@
 import UIKit
 
 class ZJEditVideoViewController: ZJBaseViewController {
+    
+    var videoURL : URL? {
+        didSet{
+           
+        }
+    }
 
     // 顶部的
     lazy var headerView : ZJEditVideoHeaderView = {
@@ -22,28 +28,27 @@ class ZJEditVideoViewController: ZJBaseViewController {
         footerView.backgroundColor = kRGBAColor(33, 33, 33, 0.5)
         return footerView
     }()
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
+    lazy var editView : ZJEditVideoView = {
+        let editView = ZJEditVideoView.init(frame: self.view.bounds)
+        editView.videoURL = self.videoURL
+        return editView
+    }()
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpAllView()
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+         setUpAllView()
     }
+    
     func setUpAllView() {
-        
-        view.addSubview(self.headerView)
-        view.addSubview(self.footerView)
-        
-        self.headerView.snp.makeConstraints { (make) in
+        view.addSubview(self.editView)
+        editView.addSubview(self.headerView)
+        editView.addSubview(self.footerView)
+        editView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        headerView.snp.makeConstraints { (make) in
             make.left.right.top.equalTo(0)
             make.height.equalTo( kisIphoneX ?  Adapt(84) : Adapt(64))
         }

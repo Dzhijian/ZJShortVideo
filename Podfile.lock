@@ -3,12 +3,14 @@ PODS:
   - GPUImage (0.1.7)
   - Kingfisher (4.10.1)
   - SnapKit (4.2.0)
+  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - Alamofire
   - GPUImage
   - Kingfisher
   - SnapKit
+  - SVProgressHUD
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -16,13 +18,15 @@ SPEC REPOS:
     - GPUImage
     - Kingfisher
     - SnapKit
+    - SVProgressHUD
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 4e05a6990fe818c8ea00ded6bf8b3005c1f19c74
+PODFILE CHECKSUM: 48fb29ad5ebb34aaf3efabaeb538b87018af5c2e
 
 COCOAPODS: 1.5.0
