@@ -11,5 +11,4 @@
 #define ZJShortVideo_bridge_h
 
 
-
 #endif /* ZJShortVideo_bridge_h */

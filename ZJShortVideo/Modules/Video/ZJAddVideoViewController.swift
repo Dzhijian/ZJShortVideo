@@ -12,7 +12,11 @@ import Photos
 import AssetsLibrary
 
 class ZJAddVideoViewController: ZJBaseViewController {
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

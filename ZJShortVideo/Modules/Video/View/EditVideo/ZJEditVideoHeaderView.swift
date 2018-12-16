@@ -9,8 +9,23 @@
 
 import UIKit
 
+/// 按钮枚举
+enum HeaderViewBtnActionType {
+    
+    case HeaderViewBtnActionTypeCancel    // 取消事件
+    case HeaderViewBtnActionTypeConfirm  // 完成事件
+}
+
+protocol ZJEditVideoHeaderViewDelegate : NSObjectProtocol{
+    func zj_headerToolBtnAction(actionType : HeaderViewBtnActionType)
+}
+
 class ZJEditVideoHeaderView: UIView {
 
+    weak var delegate : ZJEditVideoHeaderViewDelegate?
+    
+    var actionType : HeaderViewBtnActionType?
+    
     lazy var cancelBtn : UIButton = {
         let cancelBtn = UIButton.init()
         cancelBtn.setTitle("取消", for: .normal)
@@ -57,9 +72,13 @@ class ZJEditVideoHeaderView: UIView {
     @objc func btnAction(sender : UIButton) {
         if sender.tag - kBaseTarget == 1 {
             print("cancel")
+            self.actionType = HeaderViewBtnActionType.HeaderViewBtnActionTypeCancel
         } else if sender.tag - kBaseTarget == 2 {
             print("confirm")
+            self.actionType = HeaderViewBtnActionType.HeaderViewBtnActionTypeConfirm
         }
+        
+        self.delegate?.zj_headerToolBtnAction(actionType: self.actionType!)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -41,6 +41,8 @@ class ZJEditVideoView: ZJBaseView {
     
     fileprivate lazy var filterView : GPUImageView = {
        let filterView = GPUImageView.init(frame: self.bounds)
+        filterView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill
+        filterView.setInputRotation(kGPUImageFlipHorizonal, at: 0)
         return filterView
     }()
     
@@ -67,7 +69,9 @@ class ZJEditVideoView: ZJBaseView {
         playerItem = AVPlayerItem.init(url: videoURL!)
         mainPlayer?.replaceCurrentItem(with: playerItem)
         playerLayer = AVPlayerLayer.init(player: mainPlayer)
+        playerLayer?.frame = self.bounds
         
+//        self.layer.addSublayer(playerLayer!)
         movieFile = GPUImageMovie.init(playerItem: playerItem)
         movieFile?.runBenchmark = true
         movieFile?.playAtActualSpeed = true

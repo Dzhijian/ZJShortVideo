@@ -8,7 +8,7 @@
 
 import UIKit
 import GPUImage
-
+import SVProgressHUD
 
 fileprivate let kTimeInterval : Float = 0.05
 
@@ -178,17 +178,10 @@ class ZJCaptureVideoView : UIView {
     
     /// 完成录制
     func finishCaptureVideo() {
-        
+        SVProgressHUD.show(withStatus: "视频合成中...")
         videoCamera.audioEncodingTarget = nil
-        /// 将要保存的文件路径名
-        let format : DateFormatter = DateFormatter.init()
-        format.dateFormat = "yyyyMMddHHmmss"
-        let timeStr = format.string(from: Date.init(timeIntervalSinceNow: 0))
-        
         let outputPathStr : String = self.getVideoMargeFilePath()
-        
         self.zj_videoCompleteAudioVideoSynthesis(urlArr: pathArray, outPutURLStr: outputPathStr)
-        
     }
     
     deinit {
@@ -206,6 +199,12 @@ class ZJCaptureVideoView : UIView {
 extension ZJCaptureVideoView {
     /// 音视频合成
     func zj_videoCompleteAudioVideoSynthesis(urlArr : [URL], outPutURLStr : String) {
+        
+        guard self.pathArray.count > 0 else {
+            SVProgressHUD.dismiss()
+            SVProgressHUD.showError(withStatus: "暂未录制视频")
+            return
+        }
         
         // 创建音视频合成对象
         let composition = AVMutableComposition()
@@ -251,28 +250,19 @@ extension ZJCaptureVideoView {
         exprotSession.shouldOptimizeForNetworkUse = true
         // 合成完毕
         exprotSession.exportAsynchronously {
+        
             // 返回主线程继续操作
             DispatchQueue.main.async {
                 self.videoCamera.stopCapture()
-                
-                if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(outPutURLStr)) {
-                    //将视频保存到相册
-                    UISaveVideoAtPathToSavedPhotosAlbum(outPutURLStr, self, #selector(self.didFinishSavingWithError(path:error:contextInfo:)), nil);
-                }
-                self.delegate?.zj_captureViewVideoCompleteAction(videoURL: URL(string: outPutURLStr))
+                SVProgressHUD.dismiss()
+                self.delegate?.zj_captureViewVideoCompleteAction(videoURL: URL(fileURLWithPath: outPutURLStr))
             }
         }
         
         
     }
     
-    @objc func didFinishSavingWithError (path pth:String ,error:Error?,contextInfo:Any?) {
-        if error == nil {
-            print("保存视频到本地成功")
-        }else{
-            print("保存视频到本地失败")
-        }
-    }
+   
     
     //获取合成视频之后的路径  我这里直接将合成后的视频 移动到系统相册
     func getVideoMargeFilePath() -> String {
@@ -292,6 +282,7 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
     /// 开始捕获视频
     func zj_captureBtnStartAction(sender: UIButton?) {
         print("开始捕获视频")
+        
         
         captureBotView.captureToolBtnIsHidden(isHidden: true)
         self.videoPath = NSHomeDirectory() + "/tmp/movie\(pathArray.count).mov" //NSTemporaryDirectory() + "movie" + "\(pathArray.count)" + ".mov"

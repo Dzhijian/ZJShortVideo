@@ -34,20 +34,9 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
     override var prefersStatusBarHidden: Bool{
         return true
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-    
-    override func viewDidLoad() {
+        override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         view.addSubview(captureView)
         setUpAllView()
     }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SVProgressHUD
 class ZJBaseViewController: UIViewController {
 
     override func viewDidLoad() {
