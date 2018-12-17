@@ -34,6 +34,9 @@
 		048FBF5721B8332700B74C5A /* ZJCaptureBotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FBF5621B8332700B74C5A /* ZJCaptureBotView.swift */; };
 		048FBF5C21BAAD5800B74C5A /* ZJCustomBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FBF5B21BAAD5800B74C5A /* ZJCustomBtn.swift */; };
 		048FBF5E21BAB86B00B74C5A /* ZJCaptureRightToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FBF5D21BAB86B00B74C5A /* ZJCaptureRightToolView.swift */; };
+		049DFAEC21C7FE6400C2546E /* ZJCaptureFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DFAEB21C7FE6400C2546E /* ZJCaptureFilterView.swift */; };
+		049DFAEE21C7FFD800C2546E /* ZJCaptureFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DFAED21C7FFD800C2546E /* ZJCaptureFilterCell.swift */; };
+		049DFAF221C801DA00C2546E /* ZJFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DFAF121C801DA00C2546E /* ZJFileManager.swift */; };
 		04D2091C21C2A4AD00877161 /* ZJEditVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2091B21C2A4AD00877161 /* ZJEditVideoViewController.swift */; };
 		04D2091E21C2A65100877161 /* ZJBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2091D21C2A65100877161 /* ZJBaseView.swift */; };
 		04D2092021C2A69B00877161 /* ZJVideoProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2091F21C2A69B00877161 /* ZJVideoProgressView.swift */; };
@@ -95,6 +98,9 @@
 		048FBF5621B8332700B74C5A /* ZJCaptureBotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCaptureBotView.swift; sourceTree = "<group>"; };
 		048FBF5B21BAAD5800B74C5A /* ZJCustomBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCustomBtn.swift; sourceTree = "<group>"; };
 		048FBF5D21BAB86B00B74C5A /* ZJCaptureRightToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCaptureRightToolView.swift; sourceTree = "<group>"; };
+		049DFAEB21C7FE6400C2546E /* ZJCaptureFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCaptureFilterView.swift; sourceTree = "<group>"; };
+		049DFAED21C7FFD800C2546E /* ZJCaptureFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCaptureFilterCell.swift; sourceTree = "<group>"; };
+		049DFAF121C801DA00C2546E /* ZJFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFileManager.swift; sourceTree = "<group>"; };
 		04D2091B21C2A4AD00877161 /* ZJEditVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJEditVideoViewController.swift; sourceTree = "<group>"; };
 		04D2091D21C2A65100877161 /* ZJBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseView.swift; sourceTree = "<group>"; };
 		04D2091F21C2A69B00877161 /* ZJVideoProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJVideoProgressView.swift; sourceTree = "<group>"; };
@@ -308,9 +314,9 @@
 		044355C721C4DA6900DF5983 /* EditVideo */ = {
 			isa = PBXGroup;
 			children = (
+				044355C821C4DA9200DF5983 /* ZJEditVideoView.swift */,
 				045803DE21B40C0900A9E336 /* ZJEditVideoHeaderView.swift */,
 				045803E321B414C800A9E336 /* ZJEditVideoFooterView.swift */,
-				044355C821C4DA9200DF5983 /* ZJEditVideoView.swift */,
 			);
 			path = EditVideo;
 			sourceTree = "<group>";
@@ -340,6 +346,8 @@
 				048FBF5621B8332700B74C5A /* ZJCaptureBotView.swift */,
 				048FBF5D21BAB86B00B74C5A /* ZJCaptureRightToolView.swift */,
 				04D2091F21C2A69B00877161 /* ZJVideoProgressView.swift */,
+				049DFAEB21C7FE6400C2546E /* ZJCaptureFilterView.swift */,
+				049DFAED21C7FFD800C2546E /* ZJCaptureFilterCell.swift */,
 			);
 			path = Capture;
 			sourceTree = "<group>";
@@ -347,6 +355,7 @@
 		048FBF5921BAAD2400B74C5A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				049DFAF021C801B200C2546E /* Tool */,
 				048FBF5A21BAAD3600B74C5A /* View */,
 			);
 			path = Utils;
@@ -358,6 +367,14 @@
 				048FBF5B21BAAD5800B74C5A /* ZJCustomBtn.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		049DFAF021C801B200C2546E /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				049DFAF121C801DA00C2546E /* ZJFileManager.swift */,
+			);
+			path = Tool;
 			sourceTree = "<group>";
 		};
 		04D2092121C2ACB100877161 /* Model */ = {
@@ -626,12 +643,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				049DFAF221C801DA00C2546E /* ZJFileManager.swift in Sources */,
 				042F8EC821B3B0F50039EC71 /* ZJBaseViewController.swift in Sources */,
 				04D2091E21C2A65100877161 /* ZJBaseView.swift in Sources */,
 				042F8EDD21B3B6350039EC71 /* ZJProfileViewController.swift in Sources */,
 				04D2091C21C2A4AD00877161 /* ZJEditVideoViewController.swift in Sources */,
 				045803E821B418BF00A9E336 /* ZJCaptureVideoViewController.swift in Sources */,
 				042F8EDF21B3B6430039EC71 /* ZJAddVideoViewController.swift in Sources */,
+				049DFAEE21C7FFD800C2546E /* ZJCaptureFilterCell.swift in Sources */,
 				044355C921C4DA9200DF5983 /* ZJEditVideoView.swift in Sources */,
 				042F8EDB21B3B6270039EC71 /* ZJHomeViewController.swift in Sources */,
 				045803E421B414C800A9E336 /* ZJEditVideoFooterView.swift in Sources */,
@@ -641,6 +660,7 @@
 				048FBF5E21BAB86B00B74C5A /* ZJCaptureRightToolView.swift in Sources */,
 				04D2092321C2ACDE00877161 /* ZJCaptureProgressModel.swift in Sources */,
 				040EA8C421B424E30090E2CC /* ZJCaptureVideoView.swift in Sources */,
+				049DFAEC21C7FE6400C2546E /* ZJCaptureFilterView.swift in Sources */,
 				042F8E9621B3AF670039EC71 /* AppDelegate.swift in Sources */,
 				042F8EE521B3C8080039EC71 /* ZJBaseTableCell.swift in Sources */,
 				04D2092021C2A69B00877161 /* ZJVideoProgressView.swift in Sources */,
@@ -828,7 +848,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R65337KS8W;
+				DEVELOPMENT_TEAM = 28E7TBMSGR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ZJShortVideo/Macros/ZJCommon.swift;
 				INFOPLIST_FILE = ZJShortVideo/Info.plist;
@@ -855,7 +875,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R65337KS8W;
+				DEVELOPMENT_TEAM = 28E7TBMSGR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ZJShortVideo/Macros/ZJCommon.swift;
 				INFOPLIST_FILE = ZJShortVideo/Info.plist;

@@ -35,9 +35,7 @@ class ZJAddVideoViewController: ZJBaseViewController {
         }
         
     }
-    
-    
-    
+
     @objc func presenVC() {
         let nav = ZJNavigationController.init(rootViewController: ZJCaptureVideoViewController())
         self.present(nav, animated: true, completion: nil)

@@ -51,7 +51,7 @@ class ZJVideoProgressView: ZJBaseView {
     func zj_addlineLayer(value: Float, newValue: Float) {
         let lineView : UIView = UIView.init()
         lineView.backgroundColor = kWhiteColor;
-        lineView.frame = CGRect(x:CGFloat(value) * self.progressView.frame.size.width, y: 0, width: 2, height: self.progressView.frame.size.height)
+        lineView.frame = CGRect(x:CGFloat(value) * self.progressView.frame.size.width - 1, y: 0, width: 2, height: self.progressView.frame.size.height)
         print(CGFloat(value))
         self.progressView.addSubview(lineView)
         lineArray.add(lineView)

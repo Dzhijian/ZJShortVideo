@@ -20,6 +20,13 @@ protocol ZJCaptureVideoViewDelegate : NSObjectProtocol{
 class ZJCaptureVideoView : UIView {
     
     weak var delegate : ZJCaptureVideoViewDelegate?
+    weak var viewController : UIViewController?
+    
+    // 滤镜 View
+    lazy var filterView : ZJCaptureFilterView = {
+        let filterView = ZJCaptureFilterView(frame: self.bounds)
+        return filterView;
+    }()
     
     /// 初始化 videoCamera
     fileprivate lazy var videoCamera : GPUImageVideoCamera = {
@@ -86,6 +93,7 @@ class ZJCaptureVideoView : UIView {
     
     func setUpVideoCamera() {
         addSubview(showView)
+        addSubview(filterView)
         addSubview(progressView)
         addSubview(captureBotView)
         progressView.snp.makeConstraints { (make) in
@@ -146,7 +154,7 @@ class ZJCaptureVideoView : UIView {
         exposureFilter.addTarget(saturationFilter)
         //设置默认值
         // 中心色与样品色之间距离的归一化系数。
-        bilateralFilter.distanceNormalizationFactor = 5.5
+        bilateralFilter.distanceNormalizationFactor = 6
         // 曝光范围从-10.0到10.0, 0.0为正常水平
         exposureFilter.exposure = 0
         // 亮度范围从-1.0到1.0，正常亮度为0.0
@@ -207,7 +215,7 @@ class ZJCaptureVideoView : UIView {
     func finishCaptureVideo() {
         SVProgressHUD.show(withStatus: "视频合成中...")
         videoCamera.audioEncodingTarget = nil
-        let outputPathStr : String = self.getVideoMargeFilePath()
+        let outputPathStr : String = zj_getVideoMargeFilePath()
         self.zj_videoCompleteAudioVideoSynthesis(urlArr: pathArray, outPutURLStr: outputPathStr)
     }
     
@@ -285,24 +293,10 @@ extension ZJCaptureVideoView {
                 self.delegate?.zj_captureViewVideoCompleteAction(videoURL: URL(fileURLWithPath: outPutURLStr))
             }
         }
-        
-        
+
     }
     
-   
     
-    //获取合成视频之后的路径  我这里直接将合成后的视频 移动到系统相册
-    func getVideoMargeFilePath() -> String {
-        let tempath = NSTemporaryDirectory() + "/videoFolder"
-        if FileManager.default.fileExists(atPath: tempath) == false {
-            try! FileManager.default.createDirectory(atPath: tempath, withIntermediateDirectories: true, attributes: nil)
-        }
-        let dataFormatter =  DateFormatter()
-        dataFormatter.dateFormat = "yyyyMMddHHmmss"
-        let nowstr = dataFormatter.string(from: Date())
-        let pth = tempath + "/\(nowstr)" + "merge.mp4"
-        return pth
-    }
 }
 
 extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
@@ -312,7 +306,7 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
         
         
         captureBotView.captureToolBtnIsHidden(isHidden: true)
-        self.videoPath = NSHomeDirectory() + "/tmp/movie\(pathArray.count).mov" //NSTemporaryDirectory() + "movie" + "\(pathArray.count)" + ".mov"
+        self.videoPath = NSHomeDirectory() + "/tmp/movie\(pathArray.count).mp4"
         print(videoPath! + "\(self.videoPath ?? "videoPath 错误")")
         //如果一个文件已经存在，AVAssetWriter不会让你记录新的帧，所以删除旧的电影
         unlink(self.videoPath)
@@ -325,7 +319,7 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
         videoWriter!.hasAudioTrack = true
         videoWriter!.encodingLiveVideo = true
         videoWriter!.shouldPassthroughAudio = true
-//        self.filter = bilateralFilter
+        
         beautifulFilter.addTarget(videoWriter)
         videoCamera.audioEncodingTarget = videoWriter
         videoWriter!.startRecording()
@@ -356,36 +350,24 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
     }
     /// 删除视频片段
     func zj_captureDeleteBtnAction(sender: UIButton?) {
-        
-        guard self.pathArray.count == 0 else {
-            self.removeFile(pathStr: (self.pathArray.last?.absoluteString)!)
-            self.pathArray.removeLast()
-            self.progressView.zj_deleteLineAndValue()
-            return
+        let alert = UIAlertController.init(title: "您确定要删除上一段视频?", message: "", preferredStyle: .alert)
+        let cancel = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
+        let confirm = UIAlertAction.init(title: "删除", style: .default) { (_) in
+            guard self.pathArray.count == 0 else {
+                zj_removeFile(pathStr: (self.pathArray.last?.absoluteString)!)
+                self.pathArray.removeLast()
+                self.progressView.zj_deleteLineAndValue()
+                return
+            }
         }
+        alert.addAction(cancel)
+        alert.addAction(confirm)
+        self.viewController?.present(alert, animated: true, completion: nil)
         
     }
     /// 完成视频录制
     func zj_captureCompleteBtnAction(sender: UIButton?) {
         self.finishCaptureVideo()
     }
-    
-    
-    /// 删除文件
-    func removeFile(pathStr : String){
-        
-        //获得文件管理对象
-        let fileManger = FileManager.default
-        // 创建一个字符串对象，表示文档目录下的一个图片
-        let sourceUrl = pathStr.replacingOccurrences(of: "file://", with: "")
-        print("需要删除文件的路径" + sourceUrl)
-        
-        do{
-            print("Success to remove file.")
-            try fileManger.removeItem(atPath: sourceUrl)
-        }catch{
-            print("Failed!")
-        }
-    }
-    
+
 }

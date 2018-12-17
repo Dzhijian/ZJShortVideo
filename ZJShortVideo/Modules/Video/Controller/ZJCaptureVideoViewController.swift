@@ -13,6 +13,7 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
     lazy var captureView : ZJCaptureVideoView = {
         let videoView = ZJCaptureVideoView.init(frame: self.view.frame)
         videoView.delegate = self
+        videoView.viewController = self
         return videoView
     }()
     
