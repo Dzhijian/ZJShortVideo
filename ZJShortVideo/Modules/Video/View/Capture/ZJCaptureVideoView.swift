@@ -33,28 +33,29 @@ class ZJCaptureVideoView : UIView {
         captureBotView.delegate = self;
         return captureBotView
     }()
-    
+    /// 视频显示的 View ,GPUImage输出的端点
     fileprivate lazy var showView: GPUImageView  = {
         let showView = GPUImageView(frame: self.bounds)
         return showView
     }()
+    /// 进度条
     fileprivate lazy var progressView : ZJVideoProgressView = {
         let progressView = ZJVideoProgressView.init()
         return progressView;
     }()
     
-    fileprivate var filter: GPUImageFilter = {
-        let filter = GPUImageFilter()
-        return filter
-    }()
-    
+    /// 保存滤镜处理过的视频
     fileprivate var videoWriter : GPUImageMovieWriter?
-    
+    /// 滤镜
+    lazy var beautifulFilter : GPUImageFilterGroup = {
+        let beautifulFilter = GPUImageFilterGroup()
+        return beautifulFilter
+    }()
     let saturationFilter    = GPUImageSaturationFilter() // 饱和
     let bilateralFilter     = GPUImageBilateralFilter() // 磨皮
     let brightnessFilter    = GPUImageBrightnessFilter() // 美白
     let exposureFilter      = GPUImageExposureFilter() // 曝光
-    var beautifulFilter     = GPUImageFilterGroup()
+    
     /// 视频总时间长度
     var kTotalTime : Float = 15
     /// 上次记录的时间
@@ -124,14 +125,40 @@ class ZJCaptureVideoView : UIView {
         }
         ///防止允许声音通过的情况下，避免录制第一帧黑屏闪屏
         videoCamera.addAudioInputsAndOutputs()
+        // 配置滤镜
+        beautifulFilter = getGroupFilters()
         //设置GPUImage的响应链
-        videoCamera.addTarget(filter)
+        videoCamera.addTarget(beautifulFilter)
         // 将滤镜添加到显示的 View 上
-        filter.addTarget(showView)
+        beautifulFilter.addTarget(showView)
         videoCamera.inputCamera.unlockForConfiguration()
         // 开始捕获采集视频
         videoCamera.startCapture()
     }
+    
+    /// 组合滤镜
+    fileprivate func getGroupFilters() -> GPUImageFilterGroup {
+        //创建滤镜组
+        let filterGroup = GPUImageFilterGroup()
+        //创建滤镜(设置滤镜的引来关系), 对应添加
+        bilateralFilter.addTarget(brightnessFilter)
+        brightnessFilter.addTarget(exposureFilter)
+        exposureFilter.addTarget(saturationFilter)
+        //设置默认值
+        // 中心色与样品色之间距离的归一化系数。
+        bilateralFilter.distanceNormalizationFactor = 5.5
+        // 曝光范围从-10.0到10.0, 0.0为正常水平
+        exposureFilter.exposure = 0
+        // 亮度范围从-1.0到1.0，正常亮度为0.0
+        brightnessFilter.brightness = 0
+        // 饱和度范围从0.0(完全饱和)到2.0(最大饱和度)，1.0为正常水平
+        saturationFilter.saturation = 1.0
+        //设置滤镜起点 终点的filter
+        filterGroup.initialFilters = [bilateralFilter]
+        filterGroup.terminalFilter = saturationFilter
+        return filterGroup
+    }
+    
     // 切换摄像头
     func changeDevice() {
         if videoCamera.inputCamera.position == .front {
@@ -145,7 +172,7 @@ class ZJCaptureVideoView : UIView {
     
     func stopVideoCamera() {
         videoCamera.stopCapture()
-        filter.removeAllTargets()
+        beautifulFilter.removeAllTargets()
     }
     
     /// 开启定时器
@@ -298,8 +325,8 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
         videoWriter!.hasAudioTrack = true
         videoWriter!.encodingLiveVideo = true
         videoWriter!.shouldPassthroughAudio = true
-        
-        self.filter.addTarget(videoWriter)
+//        self.filter = bilateralFilter
+        beautifulFilter.addTarget(videoWriter)
         videoCamera.audioEncodingTarget = videoWriter
         videoWriter!.startRecording()
         self.isRecording = true
@@ -315,7 +342,7 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
         print("videoPath:" + "\(String(describing: self.videoPath))")
         if self.isRecording {
             videoWriter!.finishRecording()
-            filter.removeTarget(videoWriter)
+            beautifulFilter.removeTarget(videoWriter)
             let urlStr : String = self.videoPath ?? ""
             self.pathArray.append(URL(fileURLWithPath: urlStr))
             
