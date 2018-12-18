@@ -25,6 +25,9 @@ class ZJCaptureVideoView : UIView {
     // 滤镜 View
     lazy var filterView : ZJCaptureFilterView = {
         let filterView = ZJCaptureFilterView(frame: self.bounds)
+        filterView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(showViewAction(tap:)))
+        filterView.addGestureRecognizer(tap)
         return filterView;
     }()
     
@@ -43,6 +46,7 @@ class ZJCaptureVideoView : UIView {
     /// 视频显示的 View ,GPUImage输出的端点
     fileprivate lazy var showView: GPUImageView  = {
         let showView = GPUImageView(frame: self.bounds)
+        
         return showView
     }()
     /// 进度条
@@ -50,6 +54,9 @@ class ZJCaptureVideoView : UIView {
         let progressView = ZJVideoProgressView.init()
         return progressView;
     }()
+
+    /// 聚焦
+    lazy var focusLayer : CALayer = CALayer()
     
     /// 保存滤镜处理过的视频
     fileprivate var videoWriter : GPUImageMovieWriter?
@@ -96,6 +103,7 @@ class ZJCaptureVideoView : UIView {
         addSubview(filterView)
         addSubview(progressView)
         addSubview(captureBotView)
+        
         progressView.snp.makeConstraints { (make) in
             make.top.equalTo(Adapt(10));
             make.left.equalTo(Adapt(10));
@@ -285,7 +293,6 @@ extension ZJCaptureVideoView {
         exprotSession.shouldOptimizeForNetworkUse = true
         // 合成完毕
         exprotSession.exportAsynchronously {
-        
             // 返回主线程继续操作
             DispatchQueue.main.async {
                 self.videoCamera.stopCapture()
@@ -296,7 +303,80 @@ extension ZJCaptureVideoView {
 
     }
     
+    @objc func showViewAction(tap : UITapGestureRecognizer) {
+        let centerPoint = tap.location(in: showView)
+        self .setFocusLayer()
+        // 焦点动画
+        self.focusLayerAnimation(point: centerPoint)
+        let device : AVCaptureDevice = videoCamera.inputCamera
+        // 获取相机坐标点
+        let pointOfInterest = convertToPointOfInterestFromViewCoordinates(view: showView, viewCoordinates: centerPoint)
+        
+        do {
+            if try device.lockForConfiguration() != nil {
+            
+            if device.isFocusPointOfInterestSupported && device.isFocusModeSupported(.continuousAutoFocus) {
+                device.focusPointOfInterest = pointOfInterest
+                device.focusMode = .continuousAutoFocus
+            }
+            
+            if device.isExposurePointOfInterestSupported && device.isExposureModeSupported(.continuousAutoExposure) {
+                device.exposurePointOfInterest = pointOfInterest
+                device.exposureMode = .continuousAutoExposure
+            }
+            
+            device.unlockForConfiguration()
+            
+            print("FOCUS OK")
+            }
+            
+        } catch {
+            print("FOCUS")
+        }
+
+    }
     
+    
+    
+    func setFocusLayer() {
+        guard focusLayer.isHidden else {
+            return
+        }
+        let focusImage = UIImage(named: "focusing_button_65x65_")
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: focusImage?.size.width ?? 0.0, height: focusImage?.size.height ?? 0.0))
+        imageView.image = focusImage
+        let layer: CALayer = imageView.layer
+        layer.isHidden = true
+        filterView.layer.addSublayer(layer)
+        focusLayer = layer
+    }
+    
+    func focusLayerAnimation(point : CGPoint) {
+       
+        focusLayer.isHidden = false
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        focusLayer.position = point
+        focusLayer.transform = CATransform3DMakeScale(2.0, 2.0, 1.0)
+        CATransaction.commit()
+        
+        
+        let animation = CABasicAnimation(keyPath: "transform")
+        animation.toValue = NSValue(caTransform3D: CATransform3DMakeScale(1.0, 1.0, 1.0))
+        animation.duration = 0.3
+        animation.repeatCount = 1
+        animation.isRemovedOnCompletion = false
+        animation.fillMode = .forwards
+        focusLayer.add(animation, forKey: "animation")
+        
+        // 0.5秒钟延时
+        perform(#selector(focusLayerNormalStatu), with: self, afterDelay: 0.5)
+    }
+    
+    @objc func focusLayerNormalStatu() {
+        showView.isUserInteractionEnabled = true
+        focusLayer.isHidden = true
+    }
 }
 
 extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{

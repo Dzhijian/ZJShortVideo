@@ -17,6 +17,11 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
         return videoView
     }()
     
+    lazy var showFilterView : ZJShowFilterView = {
+        let showFilterView = ZJShowFilterView.init(frame: UIScreen.main.bounds)
+        return showFilterView
+    }()
+    
     /// 右边的按钮
     lazy var rightToolView : ZJCaptureRightToolView = {
         let rightView = ZJCaptureRightToolView.init(frame: .zero)
@@ -89,6 +94,7 @@ extension ZJCaptureVideoViewController : ZJCaptureRightToolViewDelegate {
             print("快慢速度")
         case .filter:
             print("美化")
+            showFilterView.showfilterView()
         case .timeDown:
             print("倒计时")
         default: break

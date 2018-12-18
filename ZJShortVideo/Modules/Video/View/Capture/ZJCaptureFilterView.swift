@@ -27,6 +27,7 @@ class ZJCaptureFilterView: UIView {
         collectionView.bounces = false
         collectionView.isPagingEnabled = true
         collectionView.backgroundColor = UIColor.clear
+        collectionView.isUserInteractionEnabled = true
         return collectionView;
     }()
     

@@ -19,6 +19,7 @@ class ZJCaptureFilterCell: ZJBaseCollectionCell {
     override func zj_initWithView() {
         self.contentView.backgroundColor = UIColor.clear
         self.backgroundColor = UIColor.clear
+        self.isUserInteractionEnabled = true
         addSubview(titleLab)
         titleLab.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
