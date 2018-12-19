@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+let kClearColor         = UIColor.clear
 let kWhiteColor         = UIColor.white
 let kBlackColor         = UIColor.black
 let kRedColor           = UIColor.red
