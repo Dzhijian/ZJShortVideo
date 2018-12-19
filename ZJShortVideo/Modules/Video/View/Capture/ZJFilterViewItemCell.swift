@@ -13,6 +13,7 @@ class ZJFilterViewItemCell: ZJBaseCollectionCell {
     fileprivate lazy var icon : UIImageView = {
         let icon = UIImageView()
         icon.contentMode = .scaleAspectFit
+        icon.image = kImageName("icon_profile_share_qqZone_48x48_")
         return icon
     }()
     
@@ -21,6 +22,7 @@ class ZJFilterViewItemCell: ZJBaseCollectionCell {
         titleLab.textColor = kRGBAColor(220, 220, 220)
         titleLab.font = kFontSize(value: 13)
         titleLab.textAlignment = .center
+        titleLab.text = "正常"
         return titleLab
     }()
     

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+fileprivate let kItemW : CGFloat = (kScreenW - Adapt(60)) / 5
 fileprivate let kMainViewHeight : CGFloat = AdaptW(250)
 class ZJShowFilterView: ZJBaseView {
 
@@ -31,11 +31,13 @@ class ZJShowFilterView: ZJBaseView {
     /// 滤镜 CollectionView
     fileprivate lazy var filterCollection : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 100, height: 100)
-        layout.minimumLineSpacing = 0
+        layout.itemSize = CGSize(width: kItemW, height: kItemW+Adapt(30))
+        layout.minimumLineSpacing = Adapt(10)
         layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 0, left: Adapt(10), bottom: 0, right: Adapt(10))
         layout.scrollDirection = .horizontal
         let filterCollection = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
+        filterCollection.backgroundColor = kClearColor
         filterCollection.delegate = self
         filterCollection.dataSource = self
         filterCollection.showsVerticalScrollIndicator = false
@@ -84,6 +86,7 @@ class ZJShowFilterView: ZJBaseView {
         mainView.addSubview(beautyBtn)
         mainView.addSubview(centerLine)
         mainView.addSubview(botLine)
+        mainView.addSubview(filterCollection)
         
         let btnW : CGFloat = (self.frame.size.width - AdaptW(40)) / 2
         
@@ -112,6 +115,12 @@ class ZJShowFilterView: ZJBaseView {
             make.top.equalTo(filterBtn.snp.top).offset(AdaptW(-10))
             make.left.right.equalTo(0)
             make.height.equalTo(0.5)
+        }
+        
+        filterCollection.snp.makeConstraints { (make) in
+            make.bottom.equalTo(botLine.snp.top).offset(Adapt(-10))
+            make.left.right.equalTo(0)
+            make.height.equalTo(Adapt(40)+kItemW)
         }
         
         filterBtn.setTitleColor(kWhiteColor, for: .normal)
