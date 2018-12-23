@@ -40,6 +40,7 @@
 		049DFAF421C949DA00C2546E /* ZJViewPointTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DFAF321C949DA00C2546E /* ZJViewPointTool.swift */; };
 		049DFAF621C94B2300C2546E /* ZJShowFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DFAF521C94B2300C2546E /* ZJShowFilterView.swift */; };
 		049DFAF821CA904F00C2546E /* ZJFilterViewItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DFAF721CA904F00C2546E /* ZJFilterViewItemCell.swift */; };
+		049DFAFE21CF5CE900C2546E /* ZJBeautySettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DFAFD21CF5CE900C2546E /* ZJBeautySettingView.swift */; };
 		04D2091C21C2A4AD00877161 /* ZJEditVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2091B21C2A4AD00877161 /* ZJEditVideoViewController.swift */; };
 		04D2091E21C2A65100877161 /* ZJBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2091D21C2A65100877161 /* ZJBaseView.swift */; };
 		04D2092021C2A69B00877161 /* ZJVideoProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2091F21C2A69B00877161 /* ZJVideoProgressView.swift */; };
@@ -107,6 +108,7 @@
 		049DFAF321C949DA00C2546E /* ZJViewPointTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJViewPointTool.swift; sourceTree = "<group>"; };
 		049DFAF521C94B2300C2546E /* ZJShowFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJShowFilterView.swift; sourceTree = "<group>"; };
 		049DFAF721CA904F00C2546E /* ZJFilterViewItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFilterViewItemCell.swift; sourceTree = "<group>"; };
+		049DFAFD21CF5CE900C2546E /* ZJBeautySettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBeautySettingView.swift; sourceTree = "<group>"; };
 		04D2091B21C2A4AD00877161 /* ZJEditVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJEditVideoViewController.swift; sourceTree = "<group>"; };
 		04D2091D21C2A65100877161 /* ZJBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseView.swift; sourceTree = "<group>"; };
 		04D2091F21C2A69B00877161 /* ZJVideoProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJVideoProgressView.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				049DFAED21C7FFD800C2546E /* ZJCaptureFilterCell.swift */,
 				049DFAF521C94B2300C2546E /* ZJShowFilterView.swift */,
 				049DFAF721CA904F00C2546E /* ZJFilterViewItemCell.swift */,
+				049DFAFD21CF5CE900C2546E /* ZJBeautySettingView.swift */,
 			);
 			path = Capture;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				042F8EE521B3C8080039EC71 /* ZJBaseTableCell.swift in Sources */,
 				04D2092021C2A69B00877161 /* ZJVideoProgressView.swift in Sources */,
 				042F8ECA21B3B10B0039EC71 /* ZJNavigationController.swift in Sources */,
+				049DFAFE21CF5CE900C2546E /* ZJBeautySettingView.swift in Sources */,
 				042F8ECD21B3B1370039EC71 /* ZJRootViewController.swift in Sources */,
 				042F8ED221B3B2080039EC71 /* ZJColorsMacor.swift in Sources */,
 				048FBF5721B8332700B74C5A /* ZJCaptureBotView.swift in Sources */,

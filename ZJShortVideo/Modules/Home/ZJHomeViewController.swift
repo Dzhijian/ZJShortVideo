@@ -32,8 +32,6 @@ class ZJHomeViewController: ZJBaseViewController {
     
 }
 
-
-
 extension ZJHomeViewController : UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 20

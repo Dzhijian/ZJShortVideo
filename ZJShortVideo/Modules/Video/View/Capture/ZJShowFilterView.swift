@@ -10,7 +10,11 @@ import UIKit
 fileprivate let kItemW : CGFloat = (kScreenW - Adapt(60)) / 5
 fileprivate let kMainViewHeight : CGFloat = AdaptW(250)
 class ZJShowFilterView: ZJBaseView {
-
+    fileprivate lazy var beautyView : ZJBeautySettingView = {
+        let beautyView = ZJBeautySettingView()
+        beautyView.isHidden = true
+        return beautyView
+    }()
     fileprivate lazy var mainView : UIView = {
         let mainView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kMainViewHeight))
         let blut = UIBlurEffect(style:UIBlurEffect.Style.dark)
@@ -87,19 +91,20 @@ class ZJShowFilterView: ZJBaseView {
         mainView.addSubview(centerLine)
         mainView.addSubview(botLine)
         mainView.addSubview(filterCollection)
+        mainView.addSubview(beautyView)
         
         let btnW : CGFloat = (self.frame.size.width - AdaptW(40)) / 2
         
         filterBtn.snp.makeConstraints { (make) in
-            make.bottom.equalTo(AdaptW(-15))
-            make.height.equalTo(AdaptW(30))
+            make.bottom.equalTo(AdaptW(-5))
+            make.height.equalTo(AdaptW(40))
             make.width.equalTo(btnW)
             make.left.equalTo(AdaptW(15))
         }
         
         beautyBtn.snp.makeConstraints { (make) in
-            make.bottom.equalTo(AdaptW(-15))
-            make.height.equalTo(AdaptW(30))
+            make.bottom.equalTo(AdaptW(-5))
+            make.height.equalTo(AdaptW(40))
             make.width.equalTo(btnW)
             make.right.equalTo(AdaptW(-15))
         }
@@ -125,6 +130,12 @@ class ZJShowFilterView: ZJBaseView {
         
         filterBtn.setTitleColor(kWhiteColor, for: .normal)
         filterBtn.titleLabel?.font = kFontBoldSize(value: 16)
+        
+        beautyView.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(botLine.snp.top).offset(Adapt(-10))
+            make.top.equalToSuperview().offset(Adapt(10))
+        }
     }
     
     /// 显示 View
@@ -158,12 +169,16 @@ class ZJShowFilterView: ZJBaseView {
             filterBtn.titleLabel?.font = kFontBoldSize(value: 16)
             beautyBtn.setTitleColor(kLightGrayColor, for: .normal)
             beautyBtn.titleLabel?.font = kFontBoldSize(value: 15)
+            filterCollection.isHidden = false
+            beautyView.isHidden = true
         }else if tag == 2 {
             print("美颜")
             beautyBtn.setTitleColor(kWhiteColor, for: .normal)
             beautyBtn.titleLabel?.font = kFontBoldSize(value: 16)
             filterBtn.setTitleColor(kLightGrayColor, for: .normal)
             filterBtn.titleLabel?.font = kFontBoldSize(value: 15)
+            filterCollection.isHidden = true
+            beautyView.isHidden = false
         }
     }
 
