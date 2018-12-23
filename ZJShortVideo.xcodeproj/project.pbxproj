@@ -351,14 +351,10 @@
 			isa = PBXGroup;
 			children = (
 				040EA8C321B424E30090E2CC /* ZJCaptureVideoView.swift */,
-				048FBF5621B8332700B74C5A /* ZJCaptureBotView.swift */,
-				048FBF5D21BAB86B00B74C5A /* ZJCaptureRightToolView.swift */,
-				04D2091F21C2A69B00877161 /* ZJVideoProgressView.swift */,
-				049DFAEB21C7FE6400C2546E /* ZJCaptureFilterView.swift */,
-				049DFAED21C7FFD800C2546E /* ZJCaptureFilterCell.swift */,
-				049DFAF521C94B2300C2546E /* ZJShowFilterView.swift */,
-				049DFAF721CA904F00C2546E /* ZJFilterViewItemCell.swift */,
-				049DFAFD21CF5CE900C2546E /* ZJBeautySettingView.swift */,
+				049DFB0221CF71D600C2546E /* CaptureProgressView(进度条) */,
+				049DFB0121CF718200C2546E /* CaptureRightView(右边工具按钮) */,
+				049DFB0021CF715D00C2546E /* CaptureBotView(底部按钮) */,
+				049DFAFF21CF711A00C2546E /* FilterAndBeautyView(美化) */,
 			);
 			path = Capture;
 			sourceTree = "<group>";
@@ -387,6 +383,42 @@
 				049DFAF321C949DA00C2546E /* ZJViewPointTool.swift */,
 			);
 			path = Tool;
+			sourceTree = "<group>";
+		};
+		049DFAFF21CF711A00C2546E /* FilterAndBeautyView(美化) */ = {
+			isa = PBXGroup;
+			children = (
+				049DFAF521C94B2300C2546E /* ZJShowFilterView.swift */,
+				049DFAF721CA904F00C2546E /* ZJFilterViewItemCell.swift */,
+				049DFAFD21CF5CE900C2546E /* ZJBeautySettingView.swift */,
+				049DFAEB21C7FE6400C2546E /* ZJCaptureFilterView.swift */,
+				049DFAED21C7FFD800C2546E /* ZJCaptureFilterCell.swift */,
+			);
+			path = "FilterAndBeautyView(美化)";
+			sourceTree = "<group>";
+		};
+		049DFB0021CF715D00C2546E /* CaptureBotView(底部按钮) */ = {
+			isa = PBXGroup;
+			children = (
+				048FBF5621B8332700B74C5A /* ZJCaptureBotView.swift */,
+			);
+			path = "CaptureBotView(底部按钮)";
+			sourceTree = "<group>";
+		};
+		049DFB0121CF718200C2546E /* CaptureRightView(右边工具按钮) */ = {
+			isa = PBXGroup;
+			children = (
+				048FBF5D21BAB86B00B74C5A /* ZJCaptureRightToolView.swift */,
+			);
+			path = "CaptureRightView(右边工具按钮)";
+			sourceTree = "<group>";
+		};
+		049DFB0221CF71D600C2546E /* CaptureProgressView(进度条) */ = {
+			isa = PBXGroup;
+			children = (
+				04D2091F21C2A69B00877161 /* ZJVideoProgressView.swift */,
+			);
+			path = "CaptureProgressView(进度条)";
 			sourceTree = "<group>";
 		};
 		04D2092121C2ACB100877161 /* Model */ = {
