@@ -14,6 +14,7 @@ class ZJFilterViewItemCell: ZJBaseCollectionCell {
         let icon = UIImageView()
         icon.contentMode = .scaleAspectFit
         icon.image = kImageName("icon_profile_share_qqZone_48x48_")
+//        icon.isUserInteractionEnabled = true
         return icon
     }()
     

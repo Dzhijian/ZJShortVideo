@@ -7,9 +7,22 @@
 //
 
 import UIKit
+import GPUImage
+
+protocol ZJShowFilterViewDelegate : NSObjectProtocol {
+    func zj_captureShowFilterViewSelectedFilter(filter : GPUImageFilterGroup)
+}
 fileprivate let kItemW : CGFloat = (kScreenW - Adapt(60)) / 5
 fileprivate let kMainViewHeight : CGFloat = AdaptW(250)
 class ZJShowFilterView: ZJBaseView {
+    weak var delegate : ZJShowFilterViewDelegate?
+    
+    /// 滤镜数组
+    lazy var dataSource : [GPUImageFilterGroup] = {
+        let dataSource = getFilterDataSource()
+        return dataSource
+    }()
+
     fileprivate lazy var beautyView : ZJBeautySettingView = {
         let beautyView = ZJBeautySettingView()
         beautyView.isHidden = true
@@ -28,10 +41,12 @@ class ZJShowFilterView: ZJBaseView {
         layer.path = circlePath.cgPath
         mainView.layer.mask = layer
         
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(mainViewAction))
-        mainView.addGestureRecognizer(tap)
+        let mainViewTap = UITapGestureRecognizer.init(target: self, action: #selector(mainViewAction))
+        mainViewTap.delegate = self
+        mainView.addGestureRecognizer(mainViewTap)
         return mainView;
     }()
+    
     /// 滤镜 CollectionView
     fileprivate lazy var filterCollection : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -47,8 +62,14 @@ class ZJShowFilterView: ZJBaseView {
         filterCollection.showsVerticalScrollIndicator = false
         filterCollection.showsHorizontalScrollIndicator = false
         filterCollection.register(ZJFilterViewItemCell.self, forCellWithReuseIdentifier: ZJFilterViewItemCell.identifier())
+//        let tap = UITapGestureRecognizer.init(target: self, action: #selector(cancelDelete))
+//        tap.delegate = self
+//        filterCollection.addGestureRecognizer(tap)
+        
         return filterCollection
     }()
+    @objc func cancelDelete() {
+    }
     fileprivate lazy var centerLine : UIView = {
         let centerLine = UIView()
         centerLine.backgroundColor = kRGBAColor(150, 150, 150)
@@ -81,6 +102,7 @@ class ZJShowFilterView: ZJBaseView {
     override func zj_initView(frame: CGRect) {
         
         let bgTap = UITapGestureRecognizer.init(target: self, action: #selector(dissMissFilterView))
+        bgTap.delegate = self
         self.addGestureRecognizer(bgTap)
         setUpAllView()
     }
@@ -183,20 +205,35 @@ class ZJShowFilterView: ZJBaseView {
     }
 
     @objc func mainViewAction() {
-        
+        print("点击了 showView")
     }
 }
 
 
 extension ZJShowFilterView : UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.dataSource.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ZJFilterViewItemCell.identifier(), for: indexPath) as! ZJFilterViewItemCell
-        
-        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        self.delegate?.zj_captureShowFilterViewSelectedFilter(filter: self.dataSource[indexPath.row])
+        
+    }
+}
+
+
+extension ZJShowFilterView : UIGestureRecognizerDelegate {
+    /// 解决点击手势冲突,响应 CollectionViewCell 的响应事件
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view?.isDescendant(of: self.filterCollection) ?? false {
+            return false
+        }
+        return true
     }
 }

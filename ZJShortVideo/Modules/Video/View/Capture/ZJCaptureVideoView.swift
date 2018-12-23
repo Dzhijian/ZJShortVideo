@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import GPUImage
-import SVProgressHUD
+
 
 fileprivate let kTimeInterval : Float = 0.05
 
@@ -131,19 +130,22 @@ class ZJCaptureVideoView : UIView {
         if (videoCamera.inputCamera.isFocusModeSupported(.autoFocus)) {
             videoCamera.inputCamera.focusMode = .continuousAutoFocus
         }
-        //自动曝光
+        
+        // 自动曝光
         if (videoCamera.inputCamera.isExposureModeSupported(.autoExpose)) {
             videoCamera.inputCamera.exposureMode = .continuousAutoExposure
         }
-        //自动白平衡
+        
+        // 自动白平衡
         if (videoCamera.inputCamera.isWhiteBalanceModeSupported(.autoWhiteBalance)) {
             videoCamera.inputCamera.whiteBalanceMode = .continuousAutoWhiteBalance
         }
-        ///防止允许声音通过的情况下，避免录制第一帧黑屏闪屏
+        
+        // 防止允许声音通过的情况下，避免录制第一帧黑屏闪屏
         videoCamera.addAudioInputsAndOutputs()
         // 配置滤镜
         beautifulFilter = getGroupFilters()
-        //设置GPUImage的响应链
+        // 设置GPUImage的响应链
         videoCamera.addTarget(beautifulFilter)
         // 将滤镜添加到显示的 View 上
         beautifulFilter.addTarget(showView)
@@ -241,7 +243,7 @@ class ZJCaptureVideoView : UIView {
 // MARK: - 音视频处理
 extension ZJCaptureVideoView {
     /// 音视频合成
-    func zj_videoCompleteAudioVideoSynthesis(urlArr : [URL], outPutURLStr : String) {
+    fileprivate func zj_videoCompleteAudioVideoSynthesis(urlArr : [URL], outPutURLStr : String) {
         
         guard self.pathArray.count > 0 else {
             SVProgressHUD.dismiss()
@@ -338,7 +340,7 @@ extension ZJCaptureVideoView {
     
     
     
-    func setFocusLayer() {
+    fileprivate func setFocusLayer() {
         guard focusLayer.isHidden else {
             return
         }
@@ -351,7 +353,7 @@ extension ZJCaptureVideoView {
         focusLayer = layer
     }
     
-    func focusLayerAnimation(point : CGPoint) {
+    fileprivate func focusLayerAnimation(point : CGPoint) {
        
         focusLayer.isHidden = false
         CATransaction.begin()
@@ -377,6 +379,20 @@ extension ZJCaptureVideoView {
         showView.isUserInteractionEnabled = true
         focusLayer.isHidden = true
     }
+    
+    func zj_changeFilter(filter : GPUImageFilterGroup) {
+        // 移除旧的滤镜
+        beautifulFilter.removeAllTargets()
+        // 配置滤镜
+        beautifulFilter = filter
+        // 设置GPUImage的响应链
+        videoCamera.addTarget(beautifulFilter)
+        // 将滤镜添加到显示的 View 上
+        beautifulFilter.addTarget(showView)
+        
+    }
+    
+    
 }
 
 extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{

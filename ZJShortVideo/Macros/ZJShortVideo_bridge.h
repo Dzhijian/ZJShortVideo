@@ -10,5 +10,6 @@
 #ifndef ZJShortVideo_bridge_h
 #define ZJShortVideo_bridge_h
 
-
+#import <GPUImage/GPUImage.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 #endif /* ZJShortVideo_bridge_h */

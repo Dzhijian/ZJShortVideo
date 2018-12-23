@@ -8,11 +8,18 @@
 //
 
 import UIKit
+protocol ZJCaptureFilterViewDelegate : NSObjectProtocol {
+    /// 滤镜选中后的代理事件
+    func zj_captureFilterViewSelectAction()
+    
+}
 
 fileprivate let kCellID = "ZJCaptureFilterCell"
 class ZJCaptureFilterView: UIView {
     
     var dataSource = NSMutableArray()
+    
+    weak var delegate : ZJCaptureFilterViewDelegate?
     
     lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -49,7 +56,7 @@ class ZJCaptureFilterView: UIView {
 
 extension ZJCaptureFilterView : UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return getFilterDataSource().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -60,7 +67,8 @@ extension ZJCaptureFilterView : UICollectionViewDelegate,UICollectionViewDataSou
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let index : NSInteger = NSInteger(scrollView.contentOffset.x / kScreenW)
-        
         print(index)
+        self.delegate?.zj_captureFilterViewSelectAction()
     }
+    
 }

@@ -19,6 +19,7 @@ class ZJCaptureVideoViewController: ZJBaseViewController {
     
     lazy var showFilterView : ZJShowFilterView = {
         let showFilterView = ZJShowFilterView.init(frame: UIScreen.main.bounds)
+        showFilterView.delegate = self
         return showFilterView
     }()
     
@@ -101,4 +102,14 @@ extension ZJCaptureVideoViewController : ZJCaptureRightToolViewDelegate {
             
         }
     }
+}
+
+
+extension ZJCaptureVideoViewController : ZJShowFilterViewDelegate{
+    
+    func zj_captureShowFilterViewSelectedFilter(filter: GPUImageFilterGroup) {
+        print("修改滤镜")
+        self.captureView.zj_changeFilter(filter: filter)
+    }
+    
 }

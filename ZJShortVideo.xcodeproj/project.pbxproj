@@ -41,6 +41,11 @@
 		049DFAF621C94B2300C2546E /* ZJShowFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DFAF521C94B2300C2546E /* ZJShowFilterView.swift */; };
 		049DFAF821CA904F00C2546E /* ZJFilterViewItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DFAF721CA904F00C2546E /* ZJFilterViewItemCell.swift */; };
 		049DFAFE21CF5CE900C2546E /* ZJBeautySettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DFAFD21CF5CE900C2546E /* ZJBeautySettingView.swift */; };
+		049DFB0421CF84D600C2546E /* ZJFilterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DFB0321CF84D600C2546E /* ZJFilterDataSource.swift */; };
+		049DFB0A21CF875800C2546E /* lookup_amatorka.png in Resources */ = {isa = PBXBuildFile; fileRef = 049DFB0621CF875800C2546E /* lookup_amatorka.png */; };
+		049DFB0B21CF875800C2546E /* lookup_miss_etikate.png in Resources */ = {isa = PBXBuildFile; fileRef = 049DFB0721CF875800C2546E /* lookup_miss_etikate.png */; };
+		049DFB0C21CF875800C2546E /* lookup_soft_elegance_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 049DFB0821CF875800C2546E /* lookup_soft_elegance_1.png */; };
+		049DFB0D21CF875800C2546E /* lookup_soft_elegance_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 049DFB0921CF875800C2546E /* lookup_soft_elegance_2.png */; };
 		04D2091C21C2A4AD00877161 /* ZJEditVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2091B21C2A4AD00877161 /* ZJEditVideoViewController.swift */; };
 		04D2091E21C2A65100877161 /* ZJBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2091D21C2A65100877161 /* ZJBaseView.swift */; };
 		04D2092021C2A69B00877161 /* ZJVideoProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2091F21C2A69B00877161 /* ZJVideoProgressView.swift */; };
@@ -109,6 +114,11 @@
 		049DFAF521C94B2300C2546E /* ZJShowFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJShowFilterView.swift; sourceTree = "<group>"; };
 		049DFAF721CA904F00C2546E /* ZJFilterViewItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFilterViewItemCell.swift; sourceTree = "<group>"; };
 		049DFAFD21CF5CE900C2546E /* ZJBeautySettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBeautySettingView.swift; sourceTree = "<group>"; };
+		049DFB0321CF84D600C2546E /* ZJFilterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFilterDataSource.swift; sourceTree = "<group>"; };
+		049DFB0621CF875800C2546E /* lookup_amatorka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lookup_amatorka.png; sourceTree = "<group>"; };
+		049DFB0721CF875800C2546E /* lookup_miss_etikate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lookup_miss_etikate.png; sourceTree = "<group>"; };
+		049DFB0821CF875800C2546E /* lookup_soft_elegance_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lookup_soft_elegance_1.png; sourceTree = "<group>"; };
+		049DFB0921CF875800C2546E /* lookup_soft_elegance_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lookup_soft_elegance_2.png; sourceTree = "<group>"; };
 		04D2091B21C2A4AD00877161 /* ZJEditVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJEditVideoViewController.swift; sourceTree = "<group>"; };
 		04D2091D21C2A65100877161 /* ZJBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseView.swift; sourceTree = "<group>"; };
 		04D2091F21C2A69B00877161 /* ZJVideoProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJVideoProgressView.swift; sourceTree = "<group>"; };
@@ -268,6 +278,7 @@
 		042F8ECF21B3B1660039EC71 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				049DFB0521CF874A00C2546E /* FilterImages */,
 				042F8E9C21B3AF680039EC71 /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -381,6 +392,7 @@
 			children = (
 				049DFAF121C801DA00C2546E /* ZJFileManager.swift */,
 				049DFAF321C949DA00C2546E /* ZJViewPointTool.swift */,
+				049DFB0321CF84D600C2546E /* ZJFilterDataSource.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -389,9 +401,9 @@
 			isa = PBXGroup;
 			children = (
 				049DFAF521C94B2300C2546E /* ZJShowFilterView.swift */,
+				049DFAEB21C7FE6400C2546E /* ZJCaptureFilterView.swift */,
 				049DFAF721CA904F00C2546E /* ZJFilterViewItemCell.swift */,
 				049DFAFD21CF5CE900C2546E /* ZJBeautySettingView.swift */,
-				049DFAEB21C7FE6400C2546E /* ZJCaptureFilterView.swift */,
 				049DFAED21C7FFD800C2546E /* ZJCaptureFilterCell.swift */,
 			);
 			path = "FilterAndBeautyView(美化)";
@@ -419,6 +431,17 @@
 				04D2091F21C2A69B00877161 /* ZJVideoProgressView.swift */,
 			);
 			path = "CaptureProgressView(进度条)";
+			sourceTree = "<group>";
+		};
+		049DFB0521CF874A00C2546E /* FilterImages */ = {
+			isa = PBXGroup;
+			children = (
+				049DFB0621CF875800C2546E /* lookup_amatorka.png */,
+				049DFB0721CF875800C2546E /* lookup_miss_etikate.png */,
+				049DFB0821CF875800C2546E /* lookup_soft_elegance_1.png */,
+				049DFB0921CF875800C2546E /* lookup_soft_elegance_2.png */,
+			);
+			path = FilterImages;
 			sourceTree = "<group>";
 		};
 		04D2092121C2ACB100877161 /* Model */ = {
@@ -564,6 +587,10 @@
 				042F8EA021B3AF680039EC71 /* LaunchScreen.storyboard in Resources */,
 				042F8E9D21B3AF680039EC71 /* Assets.xcassets in Resources */,
 				042F8E9B21B3AF670039EC71 /* Main.storyboard in Resources */,
+				049DFB0D21CF875800C2546E /* lookup_soft_elegance_2.png in Resources */,
+				049DFB0C21CF875800C2546E /* lookup_soft_elegance_1.png in Resources */,
+				049DFB0A21CF875800C2546E /* lookup_amatorka.png in Resources */,
+				049DFB0B21CF875800C2546E /* lookup_miss_etikate.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,6 +714,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				049DFB0421CF84D600C2546E /* ZJFilterDataSource.swift in Sources */,
 				049DFAF221C801DA00C2546E /* ZJFileManager.swift in Sources */,
 				042F8EC821B3B0F50039EC71 /* ZJBaseViewController.swift in Sources */,
 				04D2091E21C2A65100877161 /* ZJBaseView.swift in Sources */,
