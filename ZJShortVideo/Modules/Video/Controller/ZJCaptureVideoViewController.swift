@@ -107,9 +107,9 @@ extension ZJCaptureVideoViewController : ZJCaptureRightToolViewDelegate {
 
 extension ZJCaptureVideoViewController : ZJShowFilterViewDelegate{
     
-    func zj_captureShowFilterViewSelectedFilter(filter: GPUImageFilterGroup) {
+    func zj_captureShowFilterViewSelectedFilter(filterModel: ZJFilterModel) {
         print("修改滤镜")
-        self.captureView.zj_changeFilter(filter: filter)
+        self.captureView.zj_changeFilter(filterModel: filterModel)
     }
     
 }

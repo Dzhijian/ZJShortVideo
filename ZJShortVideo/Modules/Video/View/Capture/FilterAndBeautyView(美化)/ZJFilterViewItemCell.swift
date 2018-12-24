@@ -13,8 +13,8 @@ class ZJFilterViewItemCell: ZJBaseCollectionCell {
     fileprivate lazy var icon : UIImageView = {
         let icon = UIImageView()
         icon.contentMode = .scaleAspectFit
-        icon.image = kImageName("icon_profile_share_qqZone_48x48_")
-//        icon.isUserInteractionEnabled = true
+        icon.layer.cornerRadius = Adapt(30)
+        icon.layer.masksToBounds = true
         return icon
     }()
     
@@ -23,7 +23,6 @@ class ZJFilterViewItemCell: ZJBaseCollectionCell {
         titleLab.textColor = kRGBAColor(220, 220, 220)
         titleLab.font = kFontSize(value: 13)
         titleLab.textAlignment = .center
-        titleLab.text = "正常"
         return titleLab
     }()
     
@@ -33,8 +32,9 @@ class ZJFilterViewItemCell: ZJBaseCollectionCell {
         contentView.addSubview(icon)
         contentView.addSubview(titleLab)
         icon.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(0)
-            make.width.equalTo(self.frame.size.width)
+            make.top.equalTo(0)
+            make.centerX.equalToSuperview()
+            make.width.height.equalTo(Adapt(60))
         }
         
         titleLab.snp.makeConstraints { (make) in
@@ -44,10 +44,9 @@ class ZJFilterViewItemCell: ZJBaseCollectionCell {
         
     }
     
-    
-    func configIconAndTitle() {
-        
+    func configFilterItem(filterModel : ZJFilterModel) {
+        icon.image      = filterModel.filterIcon
+        titleLab.text   = filterModel.filterTitle
     }
-    
 
 }

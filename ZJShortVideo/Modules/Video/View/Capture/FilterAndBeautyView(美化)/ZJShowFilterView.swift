@@ -10,7 +10,7 @@ import UIKit
 import GPUImage
 
 protocol ZJShowFilterViewDelegate : NSObjectProtocol {
-    func zj_captureShowFilterViewSelectedFilter(filter : GPUImageFilterGroup)
+    func zj_captureShowFilterViewSelectedFilter(filterModel : ZJFilterModel)
 }
 fileprivate let kItemW : CGFloat = (kScreenW - Adapt(60)) / 5
 fileprivate let kMainViewHeight : CGFloat = AdaptW(250)
@@ -18,7 +18,7 @@ class ZJShowFilterView: ZJBaseView {
     weak var delegate : ZJShowFilterViewDelegate?
     
     /// 滤镜数组
-    lazy var dataSource : [GPUImageFilterGroup] = {
+    lazy var dataSource : [ZJFilterModel] = {
         let dataSource = getFilterDataSource()
         return dataSource
     }()
@@ -217,12 +217,13 @@ extension ZJShowFilterView : UICollectionViewDelegate,UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ZJFilterViewItemCell.identifier(), for: indexPath) as! ZJFilterViewItemCell
+        cell.configFilterItem(filterModel: self.dataSource[indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        self.delegate?.zj_captureShowFilterViewSelectedFilter(filter: self.dataSource[indexPath.row])
+        self.delegate?.zj_captureShowFilterViewSelectedFilter(filterModel: self.dataSource[indexPath.row])
         
     }
 }

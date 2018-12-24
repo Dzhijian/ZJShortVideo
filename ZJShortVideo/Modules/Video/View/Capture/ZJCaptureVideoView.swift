@@ -225,8 +225,8 @@ class ZJCaptureVideoView : UIView {
     func finishCaptureVideo() {
         SVProgressHUD.show(withStatus: "视频合成中...")
         videoCamera.audioEncodingTarget = nil
-        let outputPathStr : String = zj_getVideoMargeFilePath()
-        self.zj_videoCompleteAudioVideoSynthesis(urlArr: pathArray, outPutURLStr: outputPathStr)
+        let outputPathStr : String = ZJFileManager.zj_getVideoMargeFilePath()
+        self.zj_videoCompleteAudioVideoMerge(urlArr: pathArray, outPutURLStr: outputPathStr)
     }
     
     deinit {
@@ -242,67 +242,19 @@ class ZJCaptureVideoView : UIView {
 
 // MARK: - 音视频处理
 extension ZJCaptureVideoView {
-    /// 音视频合成
-    fileprivate func zj_videoCompleteAudioVideoSynthesis(urlArr : [URL], outPutURLStr : String) {
+    /// 音视频合并
+    fileprivate func zj_videoCompleteAudioVideoMerge(urlArr : [URL], outPutURLStr : String) {
+        
+        ZJFileManager.zj_videoCompleteAudioVideoSynthesis(urlArr: urlArr, outPutURLStr: outPutURLStr) {
+            self.videoCamera.stopCapture()
+            self.delegate?.zj_captureViewVideoCompleteAction(videoURL: URL(fileURLWithPath: outPutURLStr))
+        }
         
         guard self.pathArray.count > 0 else {
             SVProgressHUD.dismiss()
             SVProgressHUD.showError(withStatus: "暂未录制视频")
             return
         }
-        
-        // 创建音视频合成对象
-        let composition = AVMutableComposition()
-        // 创建音视通道容器
-        let audioTrack = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)
-        // 创建视频通道容器
-        let videoTrack = composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)
-        // 视频时间
-        var totalDuration = CMTime.zero
-        
-        // 遍历合成所有音视频
-        for (index,item) in urlArr.enumerated() {
-            
-            print("第" + "\(index)" + "段 : " + "\(item)")
-            do{
-                let options = [AVURLAssetPreferPreciseDurationAndTimingKey : true]
-                let asset = AVURLAsset.init(url: item, options: options)
-                
-                //获取AVAsset中的音频
-                let assetAudioTrack = asset.tracks(withMediaType: AVMediaType.audio).first
-                // 向通道内加入音频
-                try audioTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: asset.duration), of: assetAudioTrack!, at: totalDuration)
-                
-                //获取AVAsset中的视频
-                let assetVideoTrack = asset.tracks(withMediaType: AVMediaType.video).first
-                // 向通道内加入视频
-                try videoTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: asset.duration), of: assetVideoTrack!, at: totalDuration)
-                
-                totalDuration = CMTimeAdd(totalDuration, asset.duration);
-            } catch {
-                print("第" + "\(index)" + "段音视频插入失败")
-            }
-        }
-        
-        
-        // 音视频合成导出
-        let exprotSession : AVAssetExportSession = AVAssetExportSession.init(asset: composition, presetName: AVAssetExportPresetHighestQuality)!
-        // 输出地址
-        let saveUrl = URL.init(fileURLWithPath: outPutURLStr)
-        exprotSession.outputURL = saveUrl
-        // 输出类型
-        exprotSession.outputFileType = AVFileType.mp4
-        exprotSession.shouldOptimizeForNetworkUse = true
-        // 合成完毕
-        exprotSession.exportAsynchronously {
-            // 返回主线程继续操作
-            DispatchQueue.main.async {
-                self.videoCamera.stopCapture()
-                SVProgressHUD.dismiss()
-                self.delegate?.zj_captureViewVideoCompleteAction(videoURL: URL(fileURLWithPath: outPutURLStr))
-            }
-        }
-
     }
     
     @objc func showViewAction(tap : UITapGestureRecognizer) {
@@ -380,11 +332,11 @@ extension ZJCaptureVideoView {
         focusLayer.isHidden = true
     }
     
-    func zj_changeFilter(filter : GPUImageFilterGroup) {
+    func zj_changeFilter(filterModel : ZJFilterModel) {
         // 移除旧的滤镜
         beautifulFilter.removeAllTargets()
         // 配置滤镜
-        beautifulFilter = filter
+        beautifulFilter = filterModel.filter!
         // 设置GPUImage的响应链
         videoCamera.addTarget(beautifulFilter)
         // 将滤镜添加到显示的 View 上
@@ -404,7 +356,7 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
         captureBotView.captureToolBtnIsHidden(isHidden: true)
         self.videoPath = NSHomeDirectory() + "/tmp/movie\(pathArray.count).mp4"
         print(videoPath! + "\(self.videoPath ?? "videoPath 错误")")
-        //如果一个文件已经存在，AVAssetWriter不会让你记录新的帧，所以删除旧的电影
+        //如果一个文件已经存在，AVAssetWriter不会让你记录新的帧
         unlink(self.videoPath)
 
         // 视频文件路径
@@ -450,7 +402,7 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
         let cancel = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
         let confirm = UIAlertAction.init(title: "删除", style: .default) { (_) in
             guard self.pathArray.count == 0 else {
-                zj_removeFile(pathStr: (self.pathArray.last?.absoluteString)!)
+                ZJFileManager.zj_removeFile(pathStr: (self.pathArray.last?.absoluteString)!)
                 self.pathArray.removeLast()
                 self.progressView.zj_deleteLineAndValue()
                 return
