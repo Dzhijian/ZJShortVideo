@@ -22,7 +22,8 @@ class ZJShowFilterView: ZJBaseView {
         let dataSource = getFilterDataSource()
         return dataSource
     }()
-
+    /// 默认选中的索引
+    var seleIndex : NSInteger = 0
     fileprivate lazy var beautyView : ZJBeautySettingView = {
         let beautyView = ZJBeautySettingView()
         beautyView.isHidden = true
@@ -217,12 +218,24 @@ extension ZJShowFilterView : UICollectionViewDelegate,UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ZJFilterViewItemCell.identifier(), for: indexPath) as! ZJFilterViewItemCell
-        cell.configFilterItem(filterModel: self.dataSource[indexPath.row])
+        let model = self.dataSource[indexPath.row]
+        cell.configFilterItem(filterModel: model)
+
+        cell.configSeleImageHidden(isHidden: indexPath.row == self.seleIndex ? false : true)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        let model = self.dataSource[indexPath.row]
+        for (index,item) in self.dataSource.enumerated() {
+            if model == item {
+                item.isSelect = false
+                self.seleIndex = index
+            }
+            item.isSelect = true
+        }
+        self.filterCollection.reloadData()
         self.delegate?.zj_captureShowFilterViewSelectedFilter(filterModel: self.dataSource[indexPath.row])
         
     }

@@ -17,7 +17,10 @@ protocol ZJCaptureFilterViewDelegate : NSObjectProtocol {
 fileprivate let kCellID = "ZJCaptureFilterCell"
 class ZJCaptureFilterView: UIView {
     
-    var dataSource = NSMutableArray()
+    var dataSource : [ZJFilterModel] = {
+        let dataSource = getFilterDataSource()
+        return dataSource
+    }()
     
     weak var delegate : ZJCaptureFilterViewDelegate?
     
@@ -56,12 +59,13 @@ class ZJCaptureFilterView: UIView {
 
 extension ZJCaptureFilterView : UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return getFilterDataSource().count
+        return self.dataSource.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell : ZJCaptureFilterCell = collectionView.dequeueReusableCell(withReuseIdentifier: ZJCaptureFilterCell.identifier(), for: indexPath) as! ZJCaptureFilterCell
         cell.titleLab.text = "\(indexPath.item)"
+//        cell.backgroundColor = UIColor.init(patternImage: self.dataSource[indexPath.row].filter?.imageFromCurrentFramebuffer() ?? UIImage())
         return cell;
     }
     

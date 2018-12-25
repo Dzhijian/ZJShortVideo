@@ -71,7 +71,6 @@ class ZJEditVideoView: ZJBaseView {
         playerLayer = AVPlayerLayer.init(player: mainPlayer)
         playerLayer?.frame = self.bounds
         
-//        self.layer.addSublayer(playerLayer!)
         movieFile = GPUImageMovie.init(playerItem: playerItem)
         movieFile?.runBenchmark = true
         movieFile?.playAtActualSpeed = true

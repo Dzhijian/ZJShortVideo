@@ -50,7 +50,8 @@ class ZJFilterModel: NSObject {
     var filterValue : Float?
     /// 滤镜类型
     var filter : GPUImageFilterGroup?
-    
+    /// 是否选中状态
+    var isSelect : Bool?
     override init() {
         super.init()
         
