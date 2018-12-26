@@ -26,7 +26,7 @@ func getFilterDataSource() -> [ZJFilterModel] {
 ////    let sepia           = GPUImageSepiaFilter.init()
 ////    let toon            = GPUImageToonFilter.init()
 //    let softElegance    = GPUImageSoftEleganceFilter.init()
-////    let sket            = GPUImageSketchFilter.init()
+//    let sket            = GPUImageSketchFilter.init()
 //
 //    let dataSource      = [amatorka,missEtikate,softElegance]
 ////    dataSource.append()

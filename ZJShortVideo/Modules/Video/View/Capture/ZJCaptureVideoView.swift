@@ -87,7 +87,10 @@ class ZJCaptureVideoView : UIView {
     var progressValue : Float = 0
     /// 新增加的进度
     var progressNewValue : Float = 0
-    
+    lazy var timeValueArray : NSMutableArray = {
+        let timeValueArray = NSMutableArray.init()
+        return timeValueArray
+    }()
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -210,6 +213,7 @@ class ZJCaptureVideoView : UIView {
         self.kCurrentTime =  self.kCurrentTime + kTimeInterval
         // 计算新增加的时间值
         self.progressNewValue = self.progressNewValue + kTimeInterval
+        
         self.progressValue = progress
         //设置进度条进度
         self.progressView.zj_setProgress(value: progress)
@@ -351,17 +355,13 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
     /// 开始捕获视频
     func zj_captureBtnStartAction(sender: UIButton?) {
         print("开始捕获视频")
-        
-        
         captureBotView.captureToolBtnIsHidden(isHidden: true)
         self.videoPath = NSHomeDirectory() + "/tmp/movie\(pathArray.count).mp4"
         print(videoPath! + "\(self.videoPath ?? "videoPath 错误")")
         //如果一个文件已经存在，AVAssetWriter不会让你记录新的帧
         unlink(self.videoPath)
-
         // 视频文件路径
         let videoURL : URL = URL.init(fileURLWithPath: self.videoPath!)
-        
         print(videoURL)
         self.videoWriter = GPUImageMovieWriter.init(movieURL: videoURL, size: CGSize(width: 720.0, height: 1280.0))
         videoWriter!.hasAudioTrack = true
@@ -379,6 +379,7 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
     func zj_captureBtnStopAction(sender: UIButton?) {
         print("暂停捕获视频")
         self.stopTimer()
+        /// 显示删除完成按钮
         captureBotView.captureToolBtnIsHidden(isHidden: false)
         videoCamera.audioEncodingTarget = nil
         print("videoPath:" + "\(String(describing: self.videoPath))")
@@ -386,10 +387,13 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
             videoWriter!.finishRecording()
             beautifulFilter.removeTarget(videoWriter)
             let urlStr : String = self.videoPath ?? ""
+
+            // 保存新录制的视频文件路径
             self.pathArray.append(URL(fileURLWithPath: urlStr))
-            
             // 添加进度条的分割线
             self.progressView.zj_addlineLayer(value: self.progressValue, newValue: self.progressNewValue / self.kTotalTime)
+            // 保存时间段
+            timeValueArray.add(self.progressNewValue / self.kTotalTime)
             // 重置新增加的时间
             self.progressNewValue = 0;
             self.isRecording = false
@@ -398,15 +402,29 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
     }
     /// 删除视频片段
     func zj_captureDeleteBtnAction(sender: UIButton?) {
+        
+        guard self.pathArray.count > 0 else {
+            SVProgressHUD.showInfo(withStatus:"您好,已经没有可以删除的视频片段了!")
+            return
+        }
+        
         let alert = UIAlertController.init(title: "您确定要删除上一段视频?", message: "", preferredStyle: .alert)
         let cancel = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
         let confirm = UIAlertAction.init(title: "删除", style: .default) { (_) in
-            guard self.pathArray.count == 0 else {
-                ZJFileManager.zj_removeFile(pathStr: (self.pathArray.last?.absoluteString)!)
-                self.pathArray.removeLast()
-                self.progressView.zj_deleteLineAndValue()
-                return
-            }
+            // 删除最后一个视频文件
+            ZJFileManager.zj_removeFile(pathStr: (self.pathArray.last?.absoluteString)!)
+            // 删除最后一个视频路径
+            self.pathArray.removeLast()
+            // 获取最后一个进度
+            let value : Float = self.timeValueArray.lastObject as! Float
+            // 删除对应的时间长度
+            self.kCurrentTime = self.kCurrentTime - value * self.kTotalTime
+            // 删除最后一个时间段
+            self.timeValueArray.removeLastObject()
+            // 删除对应的进度条
+            self.progressView.zj_deleteLineAndValue(deleteValue: value)
+            return
+            
         }
         alert.addAction(cancel)
         alert.addAction(confirm)

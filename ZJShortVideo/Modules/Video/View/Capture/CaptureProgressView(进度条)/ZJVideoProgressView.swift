@@ -23,10 +23,10 @@ class ZJVideoProgressView: ZJBaseView {
         let lineArray = NSMutableArray.init()
         return lineArray
     }()
-    lazy var valueArray : NSMutableArray = {
-        let valueArray = NSMutableArray.init()
-        return valueArray
-    }()
+//    lazy var valueArray : NSMutableArray = {
+//        let valueArray = NSMutableArray.init()
+//        return valueArray
+//    }()
     
     override func zj_initView(frame: CGRect) {
         
@@ -56,11 +56,11 @@ class ZJVideoProgressView: ZJBaseView {
         self.progressView.addSubview(lineView)
         lineArray.add(lineView)
         print("newValue:" + "\(newValue)")
-        valueArray.add(newValue)
+//        valueArray.add(newValue)
     }
     
     /// 删除
-    func zj_deleteLineAndValue() {
+    func zj_deleteLineAndValue(deleteValue : Float) {
         
         // 删除分割线
         for lineView in self.progressView.subviews {
@@ -70,10 +70,10 @@ class ZJVideoProgressView: ZJBaseView {
                 lineView.removeFromSuperview()
             }
         }
-        let value : Float = valueArray.lastObject as! Float
+//        let value : Float = valueArray.lastObject as! Float
         // 减少对应的进度
-        self.progressView.setProgress(self.progressView.progress - value, animated: true)
-        valueArray.removeLastObject()
+        self.progressView.setProgress(self.progressView.progress - deleteValue, animated: true)
+//        valueArray.removeLastObject()
         
         super.layoutIfNeeded()
     }
