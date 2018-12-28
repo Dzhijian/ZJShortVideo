@@ -48,6 +48,7 @@
 		049DFB0D21CF875800C2546E /* lookup_soft_elegance_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 049DFB0921CF875800C2546E /* lookup_soft_elegance_2.png */; };
 		049DFB0F21D10F1400C2546E /* ZJFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DFB0E21D10F1400C2546E /* ZJFilterModel.swift */; };
 		049DFB1221D1209400C2546E /* ZJAmaroFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DFB1121D1209400C2546E /* ZJAmaroFilter.swift */; };
+		049DFB1721D51C4E00C2546E /* ZJBaseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DFB1621D51C4E00C2546E /* ZJBaseFilter.swift */; };
 		04D2091C21C2A4AD00877161 /* ZJEditVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2091B21C2A4AD00877161 /* ZJEditVideoViewController.swift */; };
 		04D2091E21C2A65100877161 /* ZJBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2091D21C2A65100877161 /* ZJBaseView.swift */; };
 		04D2092021C2A69B00877161 /* ZJVideoProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2091F21C2A69B00877161 /* ZJVideoProgressView.swift */; };
@@ -123,6 +124,7 @@
 		049DFB0921CF875800C2546E /* lookup_soft_elegance_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lookup_soft_elegance_2.png; sourceTree = "<group>"; };
 		049DFB0E21D10F1400C2546E /* ZJFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFilterModel.swift; sourceTree = "<group>"; };
 		049DFB1121D1209400C2546E /* ZJAmaroFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJAmaroFilter.swift; sourceTree = "<group>"; };
+		049DFB1621D51C4E00C2546E /* ZJBaseFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseFilter.swift; sourceTree = "<group>"; };
 		04D2091B21C2A4AD00877161 /* ZJEditVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJEditVideoViewController.swift; sourceTree = "<group>"; };
 		04D2091D21C2A65100877161 /* ZJBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseView.swift; sourceTree = "<group>"; };
 		04D2091F21C2A69B00877161 /* ZJVideoProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJVideoProgressView.swift; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				049DFB1121D1209400C2546E /* ZJAmaroFilter.swift */,
+				049DFB1621D51C4E00C2546E /* ZJBaseFilter.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 				049DFAF421C949DA00C2546E /* ZJViewPointTool.swift in Sources */,
 				042F8EDD21B3B6350039EC71 /* ZJProfileViewController.swift in Sources */,
 				04D2091C21C2A4AD00877161 /* ZJEditVideoViewController.swift in Sources */,
+				049DFB1721D51C4E00C2546E /* ZJBaseFilter.swift in Sources */,
 				045803E821B418BF00A9E336 /* ZJCaptureVideoViewController.swift in Sources */,
 				042F8EDF21B3B6430039EC71 /* ZJAddVideoViewController.swift in Sources */,
 				049DFAEE21C7FFD800C2546E /* ZJCaptureFilterCell.swift in Sources */,

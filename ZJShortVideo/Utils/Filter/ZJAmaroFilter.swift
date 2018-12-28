@@ -7,12 +7,16 @@
 //
 
 import UIKit
-@objc open class customFilter : GPUImageFilter {
-    
-}
-class ZJAmaroFilter: GPUImageFilterGroup {
 
+class ZJAmaroFilter: ZJBaseFilter {
+
+    let amatorka    = GPUImageAmatorkaFilter.init()
+    
     override init() {
         super.init()
+        self.addTarget(amatorka)
+        self.initialFilters.append(amatorka)
     }
+    
+    
 }

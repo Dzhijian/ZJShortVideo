@@ -167,7 +167,7 @@ class ZJCaptureVideoView : UIView {
         exposureFilter.addTarget(saturationFilter)
         //设置默认值
         // 中心色与样品色之间距离的归一化系数。
-        bilateralFilter.distanceNormalizationFactor = 6
+        bilateralFilter.distanceNormalizationFactor = 5
         // 曝光范围从-10.0到10.0, 0.0为正常水平
         exposureFilter.exposure = 0
         // 亮度范围从-1.0到1.0，正常亮度为0.0
@@ -213,7 +213,7 @@ class ZJCaptureVideoView : UIView {
         self.kCurrentTime =  self.kCurrentTime + kTimeInterval
         // 计算新增加的时间值
         self.progressNewValue = self.progressNewValue + kTimeInterval
-        
+        // 保存进度条进度
         self.progressValue = progress
         //设置进度条进度
         self.progressView.zj_setProgress(value: progress)

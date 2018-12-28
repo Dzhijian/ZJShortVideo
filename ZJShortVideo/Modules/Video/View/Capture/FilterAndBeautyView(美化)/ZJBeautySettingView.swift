@@ -7,9 +7,18 @@
 //
 
 import UIKit
+enum BeautySettingType {
+    case BeautySettingTypeBuffing // 磨皮
+    case BeautySettingTypeFaceLift // 磨皮
+    case BeautySettingTypeBigEye // 磨皮
+}
 
+protocol ZJBeautySettingViewDelegate : NSObjectProtocol {
+    func zj_beautySettingWithType(type : BeautySettingType, value : Float)
+}
 class ZJBeautySettingView: ZJBaseView {
     
+    weak var delegate : ZJBeautySettingViewDelegate?
     /// 磨皮
     fileprivate lazy var buffingLab : UILabel = {
         let buffingLab = UILabel()
@@ -113,11 +122,15 @@ class ZJBeautySettingView: ZJBaseView {
         switch slider.tag - kBaseTarget {
         case 1:
             self.buffingValueLab.text = "\(Int(slider.value))"
+            self.delegate?.zj_beautySettingWithType(type: .BeautySettingTypeBuffing, value: slider.value)
         case 2:
             self.faceLiftValueLab.text = "\(Int(slider.value))"
+            
+            self.delegate?.zj_beautySettingWithType(type: .BeautySettingTypeFaceLift, value: slider.value)
         case 3:
             self.bigEyeValueLab.text = "\(Int(slider.value))"
             
+            self.delegate?.zj_beautySettingWithType(type: .BeautySettingTypeBigEye, value: slider.value)
         default:
             break
         }

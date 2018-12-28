@@ -26,6 +26,7 @@ class ZJShowFilterView: ZJBaseView {
     var seleIndex : NSInteger = 0
     fileprivate lazy var beautyView : ZJBeautySettingView = {
         let beautyView = ZJBeautySettingView()
+        beautyView.delegate = self
         beautyView.isHidden = true
         return beautyView
     }()
@@ -241,6 +242,11 @@ extension ZJShowFilterView : UICollectionViewDelegate,UICollectionViewDataSource
     }
 }
 
+extension ZJShowFilterView : ZJBeautySettingViewDelegate {
+    func zj_beautySettingWithType(type: BeautySettingType, value: Float) {
+        
+    }
+}
 
 extension ZJShowFilterView : UIGestureRecognizerDelegate {
     /// 解决点击手势冲突,响应 CollectionViewCell 的响应事件
