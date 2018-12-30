@@ -4,7 +4,7 @@
 //
 //  Created by 邓志坚 on 2018/12/18.
 //  Copyright © 2018 邓志坚. All rights reserved.
-//
+//  
 
 import UIKit
 import GPUImage
@@ -243,6 +243,7 @@ extension ZJShowFilterView : UICollectionViewDelegate,UICollectionViewDataSource
 }
 
 extension ZJShowFilterView : ZJBeautySettingViewDelegate {
+    
     func zj_beautySettingWithType(type: BeautySettingType, value: Float) {
         
     }

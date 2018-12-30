@@ -355,6 +355,7 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
     /// 开始捕获视频
     func zj_captureBtnStartAction(sender: UIButton?) {
         print("开始捕获视频")
+        
         captureBotView.captureToolBtnIsHidden(isHidden: true)
         self.videoPath = NSHomeDirectory() + "/tmp/movie\(pathArray.count).mp4"
         print(videoPath! + "\(self.videoPath ?? "videoPath 错误")")
@@ -370,6 +371,9 @@ extension ZJCaptureVideoView : ZJCaptureBotViewDeleagte{
         
         beautifulFilter.addTarget(videoWriter)
         videoCamera.audioEncodingTarget = videoWriter
+        // 开始捕获
+        videoCamera.startCapture()
+        // 开始录制
         videoWriter!.startRecording()
         self.isRecording = true
         self.startTimer()
