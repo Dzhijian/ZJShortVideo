@@ -26,17 +26,17 @@ class ZJEditVideoViewController: ZJBaseViewController {
         footerView.backgroundColor = kRGBAColor(33, 33, 33, 0.5)
         return footerView
     }()
+    
     lazy var editView : ZJEditVideoView = {
         let editView = ZJEditVideoView.init(frame: self.view.bounds)
         editView.videoURL = self.videoURL
         return editView
     }()
  
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-         setUpAllView()
+        setUpAllView()
     }
     
     func setUpAllView() {
